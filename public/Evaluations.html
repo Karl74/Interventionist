@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Evaluations</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <!-- css -->
+  
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="">
+      <h1 class "window-title">Add an Evaluation</h1>
+    </div>
+
+    <!-- | A | SELECT A GROUP SECTION ==============================  -->
+    <div class="pill-box">
+      <div class="">
+        <h4 class=>Select a group</h4>
+      </div>
+      <div class="pill-display">
+        <!-- The groups pills are dynamic displayed here -->
+        <div class="group-pill">
+          Sample1
+        </div>
+        <div class="group-pill">
+          Sample2
+        </div>
+      </div>
+    </div>
+    <!-- End of the groups spillbox -->
+
+    <!-- | B | NEW EVALUATION SECTION ==============================  -->
+    <div class="form-box">
+      <div class="">
+        <h4 class="section-title">New Evaluation</h4>
+      </div>
+
+      <form class="form-inline">
+        <div class="form-group">
+          <label for="evName">Name</label>
+          <input type="text" class="form-control" id="evName" placeholder="New Evaluation">
+        </div>
+        <div class="form-group">
+          <label for="evDate">Date</label>
+          <input type="email" class="form-control" id="evDate" placeholder="Date">
+        </div>
+        <button type="submit" class="btn btn-default">New</button>
+      </form>
+    </div> <!-- End of New evaluation form -->
+
+    <!-- | C | ADD EVALUATION DATA SECTION ==============================  -->
+    <div class="adddata-box">
+      <div class="adddata-subtitle-box">
+        <h4 class="section-subtitle">Team: </h4>
+        <h5 class="section-subtitle-data" id="teamName">Sample1</h5>
+        <h4 class="section-subtitle">Evaluation: </h4>
+        <h5 class="section-subtitle-data" id="displayEvName">Test1</h5>
+        <h5 class="section-subtitle-data" id="displayevDate">Sept 25th</h5>
+      </div>
+
+      <table class="table">
+        <tr>
+          <th>Students</th>
+          <th>Score / Grade </th>
+        </tr>
+        <tr>
+          <td><div class="student-pill">Student1</div></td>
+          <td>
+            <div id="assign-grades">
+              <div class="input-pill">50/F</div>
+              <div class="input-pill">60/D</div>
+              <div class="input-pill">70/C</div>
+              <div class="input-pill">80/B</div>
+              <div class="input-pill">90/A</div>
+              <div class="input-pill">100/ A+</div>
+          </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+  </div>  <!-- End of container -->
+
+</body>
+
+</html>
