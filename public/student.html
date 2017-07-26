@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Add a student</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <!-- css -->
+  <link rel="stylesheet" href="css/master.css">
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="">
+      <h1 class="window-title">Add a Student</h1>
+    </div>
+
+    <!-- | A | ADD A NEW STUDENT FORM  -->
+    <div class="form-box">
+      <div class="">
+        <h4 class="section-title">New Student</h4>
+      </div>
+
+      <form class="form">
+        <div class="form-inline">
+          <div class="form-group">
+            <label for="stuId">Student Id:</label>
+            <input type="text" class="form-control" id="stuId" placeholder="Student Id">
+          </div>
+
+          <div class="form-group">
+            <label for="stuName">Name</label>
+            <input type="text" class="form-control" id="stuName" placeholder="Student name">
+          </div>
+        </div>
+
+        <div class="form-inline">
+          <div class="form-group">
+            <label for="grade">Grade:</label>
+            <input type="text" class="form-control" id="grade" placeholder="Grade">
+          </div>
+
+          <div class="form-group">
+            <label for="tier">Team:</label>
+            <input type="text" class="form-control" id="tier" placeholder="stuTier">
+          </div>
+
+          <div class="form-group">
+            <label for="team">Team:</label>
+            <input type="text" class="form-control" id="team" placeholder="optional">
+          </div>
+
+
+          <button type="submit" class="btn btn-default">New</button>
+        </div>
+      </form>
+    </div>
+    <!-- End of New student form -->
+
+    <!-- | B | EDIT A STUDENT SECTION  -->
+    <div class="">
+      <h1 class="window-title">Edit a Student</h1>
+    </div>
+
+    <div class="pill-box">
+      <div class="">
+        <h4 class=>Select a Student</h4>
+      </div>
+
+      <!-- | B.1 | GET ALL STUDENTS SUB-SECTION  -->
+      <div class="pill-display">
+        <!-- The groups pills are dynamic displayed here -->
+        <div class="find-pill">
+          Type Name
+        </div>
+        <div class="student-pill">
+          Sample2
+        </div>
+      </div>
+    </div>
+
+    <!-- | B.2 | EDIT A STUDENT FORM  -->
+    <form class="form">
+      <div class="form-inline">
+        <div class="form-group">
+          <label for="stuId">Student Id:</label>
+          <input type="text" class="form-control" id="stuId" placeholder="Student Id">
+        </div>
+
+        <div class="form-group">
+          <label for="stuName">Name</label>
+          <input type="email" class="form-control" id="stuName" placeholder="Student name">
+        </div>
+      </div>
+
+      <div class="form-inline">
+        <div class="form-group">
+          <label for="grade">Grade:</label>
+          <input type="text" class="form-control" id="grade" placeholder="Grade">
+        </div>
+
+        <div class="form-group">
+          <label for="team">Team:</label>
+          <input type="text" class="form-control" id="team" placeholder="optional">
+        </div>
+
+        <button type="submit" class="btn btn-default">Change</button>
+      </div>
+    </form>
+  </div>
+  <!-- End of container -->
+
+</body>
+
+</html>

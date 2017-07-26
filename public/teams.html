@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Team</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- css -->
+    <link rel="stylesheet" href="css/master.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="">
+        <h1 class="window-title">| Add or Edit a Team |</h1>
+      </div>
+
+      <!-- | A | SELECT A TEAM SECTION ==============================  -->
+      <div class="pill-box">
+        <div class="">
+          <h4 class=>Select Team or Create one</h4>
+        </div>
+        <div class="pill-display">
+          <!-- The groups pills are dynamic displayed here -->
+          <div class="find-pill">
+            New Team
+          </div>
+          <div class="group-pill">
+            Sample2
+          </div>
+        </div>
+      </div>
+      <!-- End of the groups spillbox -->
+
+      <div class="form-box">
+        <div class="">
+          <h4 class="section-title">Team Settings</h4>
+        </div>
+
+        <form class="form-inline">
+          <div class="form-group">
+            <label for="teamName">Name</label>
+            <input type="text" class="form-control" id="teamName" placeholder="Team Name">
+          </div>
+
+          <div class="form-group">
+            <label for="grade">Grade</label>
+            <input type="text" class="form-control" id="teamGrade" placeholder="Team Grade">
+          </div>
+
+          <div class="form-group">
+            <label for="tier">Tier</label>
+            <input type="text" class="form-control" id="tier" placeholder="Team Tier">
+          </div>
+
+        </form>
+      </div> <!-- End of create edit a team info form -->
+
+      <!-- | B | DISPLAY TEAM'S STUDENTS SECTION ======================  -->
+      <div class="pill-box">
+        <div class="">
+          <h4 class=>Click on the students names to remove them from the team</h4>
+        </div>
+        <div class="pill-display">
+          <!-- The groups pills are dynamic displayed here -->
+          <div class="student-pill">
+            Student 1
+          </div>
+          <div class="student-pill">
+            Student 2
+          </div>
+        </div>
+      </div>  <!-- Enf of students in the team -->
+
+      <!-- | B | DISPLAY AVAILABLE STUDENTS SECTION ======================  -->
+      <div class="pill-box">
+        <div class="">
+          <h4 class=>Click on the students names to add them to the team</h4>
+        </div>
+        <div class="pill-display">
+          <!-- The groups pills are dynamic displayed here -->
+          <div class="find-pill">
+            find
+          </div>
+          <div class="student-pill">
+            Student 2
+          </div>
+        </div>
+      </div>  <!-- Enf of available students section -->
+      <button type="submit" class="btn btn-default">New / Update Team</button>
+
+
+    </div> <!-- END OF CONTAINER -->
+  </body>
+</html>
