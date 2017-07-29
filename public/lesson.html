@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Lesson</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <!-- css -->
+  <link rel="stylesheet" href="css/master.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="">
+      <h1 class="window-title"> Lesson Tracker</h1>
+    </div>
+
+    <!-- | A | SELECT A GROUP SECTION ==============================  -->
+    <div class="pill-box">
+      <div class="">
+        <h4 class=>Select a group</h4>
+      </div>
+      <div class="pill-display">
+        <!-- The groups pills are dynamic displayed here -->
+        <div class="find-pill">
+          Type Name
+        </div>
+        <div class="group-pill">
+          Sample2
+        </div>
+      </div>
+    </div>
+    <!-- End of the groups spillbox -->
+
+    <!-- | B | SET A SKILL FOR THE LESSON SECTION ========================  -->
+    <div class="form-box">
+      <div class="">
+        <h4 class="section-title">Lesson Skill</h4>
+      </div>
+
+      <div class="pill-display">
+        <!-- The groups pills are dynamic displayed here -->
+        <div class="find-pill">
+          skill Catalog
+        </div>
+
+        <div class="find-pill">
+          new skill
+        </div>
+
+        <div class="skill-pill">
+          Sample2
+        </div>
+      </div>
+    </div>
+
+
+  <!-- End of set a skill for the lesson -->
+
+  <!-- | C | LESSON TRACKER SECTION ==============================  -->
+  <div class="adddata-box">
+    <div class="adddata-subtitle-box">
+      <h4 class="section-subtitle">Team: </h4>
+      <h5 class="section-subtitle-data" id="teamName">Sample1</h5>
+      <h4 class="section-subtitle">Working on: </h4>
+      <h5 class="section-subtitle-data" id="displayLessonSkill">Skill</h5>
+      <h5 class="section-subtitle-data" id="displayLessonDate">Sept 25th</h5>
+    </div>
+
+    <table class="table">
+      <tr>
+        <th>Students</th>
+        <th>Counter - / +</th>
+        <th>Session Performance</th>
+        <th>Notes</th>
+      </tr>
+      <tr>
+        <td>
+          <div class="student-pill">Student1</div>
+        </td>
+        <td>
+          <div id="counter">
+            <div class="input-pill">+</div>
+            <div class="input-pill">-</div>
+          </div>
+        </td>
+        <td>
+          <div class="input-pill">Under</div>
+          <div class="input-pill">Meets</div>
+          <div class="input-pill">Exceeds</div>
+        </td>
+        <td>
+          <label for="">Notes</label>
+          <input type="text" name="" value="">
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  </div>
+  <!-- End of container -->
+
+  <div class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Add a skill</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-inline">
+          <div class="form-group">
+            <label for="skillName">Skill</label>
+            <input type="text" class="form-control" id="SkillName" placeholder="New Skill">
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</body>
+
+</html>
