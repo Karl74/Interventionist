@@ -1,10 +1,24 @@
 body{
-  background-color: #e1debc;
+  background-color: #eeeeff;
+  width: 784px;
 }
 
-.window-title{}
+.window-title{
+  height: 59px;
+  color:white;
+  border-radius:6px;
+  background-image: linear-gradient(#0060c0, #004890);
+  box-shadow: 1px 3px 3px #909090;
+  padding: 10px;
+}
 
-.pill-box{}
+.pill-box{
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 6px;
+  background-color: #ffffff;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+}
 
 .section-title{}
 
@@ -40,7 +54,9 @@ body{
 
 #assign-grades{}
 
-.pill-desplay{}
+.pill-display{
+  margin: 10px;
+}
 
 .form-box{}
 
