@@ -26,10 +26,10 @@
       </div>
       <div class="pill-display">
         <!-- The groups pills are dynamic displayed here -->
-        <div class="find-pill">
+        <div class="find-pill pill">
           Type Name
         </div>
-        <div class="group-pill">
+        <div class="group-pill pill">
           Sample2
         </div>
       </div>
@@ -44,15 +44,15 @@
 
       <div class="pill-display">
         <!-- The groups pills are dynamic displayed here -->
-        <div class="find-pill">
-          skill Catalog
+        <div class="find-pill pill">
+          List
         </div>
 
-        <div class="find-pill">
+        <div class="find-pill pill">
           new skill
         </div>
 
-        <div class="skill-pill">
+        <div class="skill-pill pill">
           Sample2
         </div>
       </div>
@@ -64,11 +64,15 @@
   <!-- | C | LESSON TRACKER SECTION ==============================  -->
   <div class="adddata-box">
     <div class="adddata-subtitle-box">
-      <h4 class="section-subtitle">Team: </h4>
-      <h5 class="section-subtitle-data" id="teamName">Sample1</h5>
-      <h4 class="section-subtitle">Working on: </h4>
-      <h5 class="section-subtitle-data" id="displayLessonSkill">Skill</h5>
-      <h5 class="section-subtitle-data" id="displayLessonDate">Sept 25th</h5>
+      <div id="teamSubtitle" class="adddata-subtitle-box">
+        <h4 class="section-subtitle">Team: &nbsp;</h4>
+        <h4 class="section-subtitle-data" id="teamName">Sample1</h4>
+      </div>
+      <div id="skillSubtitleBox" class="adddata-subtitle-box">
+        <h4 class="section-subtitle">&nbsp;Working on: &nbsp; </h4>
+        <h4 class="section-subtitle-data" id="displayLessonSkill">Skill</h4>
+      </div>
+      <h4 class="section-subtitle-data" id="displayLessonDate"> &nbsp;Sept 25th</h4>
     </div>
 
     <table class="table">
@@ -80,18 +84,20 @@
       </tr>
       <tr>
         <td>
-          <div class="student-pill">Student1</div>
+          <div class="student-pill pill">Student1</div>
         </td>
         <td>
           <div id="counter">
-            <div class="input-pill">+</div>
-            <div class="input-pill">-</div>
+            <div class="input-pill pill">+</div>
+            <div class="input-pill pill">-</div>
           </div>
         </td>
         <td>
-          <div class="input-pill">Under</div>
-          <div class="input-pill">Meets</div>
-          <div class="input-pill">Exceeds</div>
+          <div id="performance">
+            <div class="input-pill pill">Under</div>
+            <div class="input-pill pill">Meets</div>
+            <div class="input-pill pill">Exceeds</div>
+          </div>
         </td>
         <td>
           <label for="">Notes</label>

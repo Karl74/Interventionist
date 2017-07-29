@@ -27,10 +27,10 @@
       </div>
       <div class="pill-display">
         <!-- The groups pills are dynamic displayed here -->
-        <div class="find-pill">
+        <div class="find-pill pill">
           Type Name
         </div>
-        <div class="group-pill">
+        <div class="group-pill pill">
           Sample2
         </div>
       </div>
@@ -59,11 +59,15 @@
     <!-- | C | ADD EVALUATION DATA SECTION ==============================  -->
     <div class="adddata-box">
       <div class="adddata-subtitle-box">
-        <h4 class="section-subtitle">Team: </h4>
-        <h5 class="section-subtitle-data" id="teamName">Sample1</h5>
-        <h4 class="section-subtitle">Evaluation: </h4>
-        <h5 class="section-subtitle-data" id="displayEvName">Test1</h5>
-        <h5 class="section-subtitle-data" id="displayevDate">Sept 25th</h5>
+        <div id="teamSubtitle" class="adddata-subtitle-box">
+          <h4 class="section-subtitle">Team: &nbsp; </h4>
+          <h4 class="section-subtitle-data" id="teamName">Sample1</h4>
+        </div>
+        <div id="evaSubtitleBox" class="adddata-subtitle-box">
+        <h4 class="section-subtitle"> &nbsp;Evaluation: &nbsp; </h4>
+        <h4 class="section-subtitle-data" id="displayEvName">Test1 </h4>
+      </div>
+        <h4 class="section-subtitle-data" id="displayevDate">&nbsp; Sept 25th</h4>
       </div>
 
       <table class="table">
@@ -72,15 +76,15 @@
           <th>Score / Grade </th>
         </tr>
         <tr>
-          <td><div class="student-pill">Student1</div></td>
+          <td><div class="student-pill pill">Student1</div></td>
           <td>
-            <div id="assign-grades">
-              <div class="input-pill">50/F</div>
-              <div class="input-pill">60/D</div>
-              <div class="input-pill">70/C</div>
-              <div class="input-pill">80/B</div>
-              <div class="input-pill">90/A</div>
-              <div class="input-pill">100/ A+</div>
+            <div id="assignGrades">
+              <div class="input-pill pill">50/F</div>
+              <div class="input-pill pill">60/D</div>
+              <div class="input-pill pill">70/C</div>
+              <div class="input-pill pill">80/B</div>
+              <div class="input-pill pill">90/A</div>
+              <div class="input-pill pill">100/ A+</div>
           </div>
           </td>
         </tr>
