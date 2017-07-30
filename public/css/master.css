@@ -12,7 +12,7 @@ body{
   padding: 10px;
 }
 
-.pill-box{
+.pill-box, .list-box{
   margin-top: 20px;
   padding: 15px;
   border-radius: 6px;
@@ -21,6 +21,11 @@ body{
   box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.14);
 }
 
+.list-box{
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+}
 .form-box{
   margin-top: 20px;
   padding: 15px;
@@ -111,6 +116,7 @@ body{
 }
 
 .skill-pill{
+  width: 190px;
   color: hsl(208, 50%, 40%)!important;
   background-color: hsl(208, 100%, 75%);
   background-image: -webkit-gradient(radial, 50% 0, 100, 50% 0, 0,
