@@ -54,7 +54,6 @@ body{
   padding-bottom: 10px;
 }
 
-
 .section-title{}
 
 .pill{
@@ -149,10 +148,28 @@ body{
   padding-bottom: 10px;
 }
 
+/*apply on lessons html only*/
 #counter{
   display: flex;
   justify-content:flex-start;
+  align-items: center;
 }
+
+.counts-box{
+  display: flex;
+  justify-content:space-around;
+  align-items: center;
+  font-weight: bold;
+}
+.count-display{
+  background-color: white;
+  border: 1px solid #a9a9a9;
+  padding: 3px 6px;
+  text-align: center;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
 
 #performance{
   display: flex;
@@ -162,4 +179,8 @@ body{
 #assignGrades{
   display: flex;
   justify-content:flex-start;
+}
+
+.btn{
+  margin:5px;
 }
