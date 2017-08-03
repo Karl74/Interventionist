@@ -16,12 +16,12 @@
 
 <body>
   <div class="container">
-    <div class="">
-      <h1 class="window-title">Add a Student</h1>
+    <div class="head">
+      <h1 class="window-title accordion" data-color="white">Add a Student</h1>
     </div>
 
     <!-- | A | ADD A NEW STUDENT FORM  -->
-    <div class="form-box">
+    <div class="form-box" id="addStudentBox">
       <div class="">
         <h4 class="section-title">New Student</h4>
       </div>
@@ -46,15 +46,14 @@
           </div>
 
           <div class="form-group">
-            <label for="tier">Team:</label>
-            <input type="text" class="form-control" id="tier" placeholder="stuTier">
+            <label for="tier">Tier:</label>
+            <input type="text" class="form-control" id="tier" placeholder="Student Tier">
           </div>
 
           <div class="form-group">
             <label for="team">Team:</label>
             <input type="text" class="form-control" id="team" placeholder="optional">
           </div>
-
 
           <button type="submit" class="btn btn-default">New</button>
         </div>
@@ -85,35 +84,36 @@
     </div>
 
     <!-- | B.2 | EDIT A STUDENT FORM  -->
-    <form class="form">
-      <div class="form-inline">
-        <div class="form-group">
-          <label for="stuId">Student Id:</label>
-          <input type="text" class="form-control" id="stuId" placeholder="Student Id">
+    <div class="form-box">
+      <form class="form">
+        <div class="form-inline">
+          <div class="form-group">
+            <label for="stuId">Student Id:</label>
+            <input type="text" class="form-control" id="stuId" placeholder="Student Id">
+          </div>
+
+          <div class="form-group">
+            <label for="stuName">Name</label>
+            <input type="email" class="form-control" id="stuName" placeholder="Student name">
+          </div>
         </div>
 
-        <div class="form-group">
-          <label for="stuName">Name</label>
-          <input type="email" class="form-control" id="stuName" placeholder="Student name">
-        </div>
-      </div>
+        <div class="form-inline">
+          <div class="form-group">
+            <label for="grade">Grade:</label>
+            <input type="text" class="form-control" id="grade" placeholder="Grade">
+          </div>
 
-      <div class="form-inline">
-        <div class="form-group">
-          <label for="grade">Grade:</label>
-          <input type="text" class="form-control" id="grade" placeholder="Grade">
-        </div>
+          <div class="form-group">
+            <label for="team">Team:</label>
+            <input type="text" class="form-control" id="team" placeholder="optional">
+          </div>
 
-        <div class="form-group">
-          <label for="team">Team:</label>
-          <input type="text" class="form-control" id="team" placeholder="optional">
+          <button type="submit" class="btn btn-default">Change</button>
         </div>
-
-        <button type="submit" class="btn btn-default">Change</button>
-      </div>
-    </form>
-  </div>
-  <!-- End of container -->
+      </form>
+    </div>
+  </div>  <!-- End of container -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
     crossorigin="anonymous"></script>

@@ -184,3 +184,19 @@ body{
 .btn{
   margin:5px;
 }
+
+.active{
+  color:pink;
+  background-image: linear-gradient(#ff9030, #a9a9a9);
+}
+
+.accordion:hover {
+  background-image: linear-gradient(#ff9030, #a9a9a9);
+}
+
+.head{
+  color: red;
+}
+#addStudentBox{
+  display: none;
+}
