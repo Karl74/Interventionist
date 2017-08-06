@@ -14,14 +14,17 @@
 
 </head>
 
+
 <body>
   <div class="container">
-    <div class="head">
-      <h1 class="window-title accordion" data-color="white">Add a Student</h1>
+    <div class="headBar">
+      <button class="window-title expander" data-status="contracted">
+        <span class="glyphicon glyphicon-plus"></span>
+        &nbsp Add a Student</button>
     </div>
 
     <!-- | A | ADD A NEW STUDENT FORM  -->
-    <div class="form-box" id="addStudentBox">
+    <div class="form-box loadsContracted">
       <div class="">
         <h4 class="section-title">New Student</h4>
       </div>
@@ -62,11 +65,13 @@
     <!-- End of New student form -->
 
     <!-- | B | EDIT A STUDENT SECTION  -->
-    <div class="">
-      <h1 class="window-title">Edit a Student</h1>
+    <div class="headBar">
+      <button class="window-title expander" data-status="contracted">
+        <span class="glyphicon glyphicon-plus"></span>
+        &nbsp Edit a Student</button>
     </div>
 
-    <div class="pill-box">
+    <div class="pill-box loadsContracted">
       <div class="">
         <h4 class=>Select a Student</h4>
       </div>
@@ -78,7 +83,7 @@
           Type Name
         </div>
         <div class="student-pill pill">
-          Sample2
+          Stu name
         </div>
       </div>
     </div>

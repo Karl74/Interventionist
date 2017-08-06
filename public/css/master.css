@@ -5,39 +5,40 @@ body{
 
 .window-title{
   height: 59px;
+  width: 100%;
+  text-align: left;
   color:white;
-  border-radius:6px;
+  border-radius:6px !important;
   background-image: linear-gradient(#0060c0, #004890);
-  box-shadow: 1px 3px 3px #909090;
-  padding: 10px;
+  box-shadow: 1px 3px 3px #909090 !important;
+  padding: 5px;
+  border: 0px;
+  font-size: 36px;
 }
 
-.pill-box, .list-box{
-  margin-top: 20px;
-  padding: 15px;
-  border-radius: 6px;
-  background-color: #fff;
-  /*background-image: linear-gradient(#e6e6e6, #cccccc);*/
-  box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.14);
+.glyphicon{
+  font-size: 30px;
 }
 
+.headBar{
+  display: inline;
+}
+
+button {
+  margin-top:5px;
+}
 .list-box{
   min-height: 300px;
   display: flex;
   flex-direction: column;
 }
+
 .form-box{
   margin-top: 20px;
   padding: 15px;
   border-radius: 6px;
   background-color: #e5e5ff;
   box-shadow: 0 1px 4px 0px rgba(0, 0, 0, 0.14);
-}
-
-.pill-display{
-  margin: 10px;
-  display:flex;
-  flex-wrap: wrap;
 }
 
 .adddata-box{
@@ -54,7 +55,27 @@ body{
   padding-bottom: 10px;
 }
 
+.btn{
+  margin:5px;
+}
+
 .section-title{}
+
+/* == PILLS STYLE ============================================= */
+.pill-box, .list-box{
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 6px;
+    background-color: #fff;
+    /*background-image: linear-gradient(#e6e6e6, #cccccc);*/
+    box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.14);
+  }
+
+.pill-display{
+    margin: 10px;
+    display:flex;
+    flex-wrap: wrap;
+  }
 
 .pill{
   margin:4px;
@@ -79,7 +100,6 @@ body{
             hsl(39, 100%, 40%) 0 .1em 3px,
             hsl(39, 100%, 30%) 0 .3em 1px, /* color border */ rgba(0,0,0,0.2) 0 .5em 5px;
   }
-
 
 .group-pill {
   color: hsl(88, 70%, 30%)!important;
@@ -126,17 +146,13 @@ body{
             hsl(208, 50%, 40%) 0 .3em 1px, /* color border */ rgba(0,0,0,0.2) 0 .5em 5px;
 }
 
+/*== END OF PILLS STYLE =========================================*/
+
 .input-label{}
 
 .section-subtitle{}
 
 #assign-grades{}
-
-.pill-display{
-  margin: 10px;
-  display:flex;
-  flex-wrap: wrap;
-}
 
 .adddata-box{
   margin-top: 15px;
@@ -148,7 +164,7 @@ body{
   padding-bottom: 10px;
 }
 
-/*apply on lessons html only*/
+/* ======== lessons html only=========================== */
 #counter{
   display: flex;
   justify-content:flex-start;
@@ -170,7 +186,6 @@ body{
   margin-right: 4px;
 }
 
-
 #performance{
   display: flex;
   justify-content:flex-start;
@@ -181,22 +196,33 @@ body{
   justify-content:flex-start;
 }
 
-.btn{
-  margin:5px;
+/*== EXPANDED PANNELS ===================================*/
+.childExpanded{
+  height: 59px;
+  width: 100%;
+  text-align: left;
+  color: #d9d9d9;
+  border-radius:6px;
+  background-image: linear-gradient(#004890, #003366);
+  box-shadow: 1px 3px 3px #909090;
+  padding: 5px;
+  border: 0px;
+  font-size: 36px;
 }
 
-.active{
-  color:pink;
-  background-image: linear-gradient(#ff9030, #a9a9a9);
+.expander:hover {
+  background-image: linear-gradient(#004890, #003366);
+  color:#d9d9d9;
 }
 
-.accordion:hover {
-  background-image: linear-gradient(#ff9030, #a9a9a9);
-}
-
-.head{
-  color: red;
-}
-#addStudentBox{
+.loadsContracted{
   display: none;
+}
+
+.expander:focus{
+outline: 0;
+}
+
+.childExpanded:focus{
+  outline: 0;
 }

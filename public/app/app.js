@@ -1,38 +1,40 @@
 $(document).ready(function(){
   console.log("It's alive!!!!!");
-$(".pill").on("click", function(){
-  console.log("Hola Marianita, ¿Estas leyendo?");
+
+
+
+$(".headBar").on("click", function(){
+  if($(event.target).data("status") == "contracted"){
+    expandChild($(event.target));
+} else if($(event.target).data("status") == "expanded"){
+    contractChild($(event.target));
+}
 });
+
+// Expand a child
+      //   change the status at the buttonbar
+      //   change the bar class
+      //   change the display of the child
+function expandChild(bar){
+  bar.data("status", "expanded");
+  bar.attr("class", "childExpanded");
+  bar.parent().next().css("display", "block");
+  bar.children().attr("class", "glyphicon glyphicon-minus");
+}
+
+function contractChild(bar){
+  bar.data("status", "contracted");
+  bar.attr("class", "window-title expander");
+  bar.parent().next().css("display", "none");
+  bar.children().attr("class", "glyphicon glyphicon-plus");
+}
+
+// $(".headBar").on("click", function(){
+//   expandChild($(event.target));
+// });
 
 });//End of document get ready
-
-$(".head").on("click", function(){
-console.log($(event.target).data("color"));
-if($(event.target).data("color") == "white"){
-  console.log("It is white!!!");
-  $(event.target).data("color", "red");
-  $(event.target).attr("class","active");
-  $("#addStudentBox").css("display", "block");
-} else {
-  console.log("it is red");
-    $(event.target).data("color", "white");
-    $(event.target).attr("class", "window-title accordion");
-    $("#addStudentBox").css("display", "none");
-}
-console.log($(event.target).data("color"));
-
-
-
-    // this.classList.toggle("active")
-
-    // $(event.target) returns the children????
-      // this.classList.toggle returns the head class
-
-
-});
-
-
-var studentApp = {
+// var studentApp = {
 // function to display the "New Student form"
 // function to close the "New Student form"
 // event handler for add a student
@@ -70,9 +72,4 @@ var studentApp = {
 // function to inform the user that the student info was updated
 // handler event for change button
 
-
-
-
-
-
-}
+// }
