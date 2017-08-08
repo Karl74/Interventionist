@@ -77,10 +77,10 @@
       </div>
 
       <!-- | B.1 | GET ALL STUDENTS SUB-SECTION  -->
-      <div class="pill-display">
+      <div class="pill-display stu-dis">
         <!-- The groups pills are dynamic displayed here -->
         <div class="find-pill pill">
-          Type Name
+          Find
         </div>
         <div class="student-pill pill">
           Stu name
@@ -118,10 +118,30 @@
         </div>
       </form>
     </div>
-  </div>  <!-- End of container -->
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"
-    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-    crossorigin="anonymous"></script>
+
+    <!-- | C | FIND STUDENT MODAL  -->
+    <div class="modal-screen">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close closeM" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Type the student name...</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="stuName">Name</label>
+              <input type="email" class="form-control" id="findStuName" placeholder="Student name">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default closeM">Cancel</button>
+            <button type="button" class="btn btn-primary">Find</button>
+          </div>
+        </div> <!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div> <!-- end of modal-screen -->
+  </div> <!-- End of container -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script type="text/javascript" src="app/app.js"></script>
 </body>
 
