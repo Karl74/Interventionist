@@ -1,94 +1,118 @@
 $(document).ready(function() {
   console.log("It's alive!!!!!");
-// == | A | EVENT HANDLERS ==================================
-  $(".headBar").on("click", function() {
-    if ($(event.target).data("status") == "contracted") {
-      expandChild($(event.target));
-    } else if ($(event.target).data("status") == "expanded") {
-      contractChild($(event.target));
-    }
-  });
+// == | A | EVENT HANDLERS for Student.html ==================================
+  // Blue large buttons. Expands or contracts divs whith pills---------------------
+    $(".headBar").on("click", function() {
+      if ($(event.target).data("status") == "contracted") {
+        expandChild($(event.target));
+      } else if ($(event.target).data("status") == "expanded") {
+        contractChild($(event.target));
+      }
+    });
+  // New student button. Send the new student info to the database
+    $("#newStudentButton").on("click", function(){
+      event.preventDefault();
+      addNewStudent();
+      $(".form-control").val("");
+      alert("the new student was saved")
+    });
+  // Change Student Button. Send the updated information of the student to the database
+    $("#editStudentButton").on("click", function(){
+      event.preventDefault();
+      updateStudent();
+      $(".form-control").val("");
+      // hides the edit form
+      $("#editStudent").css("display", "none");
+      alert("changes were made")
+    });
 
-  $(".closeM").on("click", function(){
-      closeModal();
-  });
+  // Modal x and cancel buttons. Close the modal ---------------------------------
+    $(".closeM").on("click", function(){
+        closeModal();
+    });
 
-  $(".find-pill").on("click", function(){
-    openModal();
-  });
+  // Find pill. Opens the serch modal -----------------------------
+    $(".find-pill").on("click", function(){
+      openModal();
+    });
+
+    // Find button on modal runs findStudent()
+      $("#findStudentButton").on("click", function(){
+        findStudent();
+        closeModal();
+        $("#editStudent").css("display", "block");
+      });
+
+//  == | B | FUNCTIONS ==================================
   // Make modal visible
-  function openModal(){
-    $(".modal-screen").css("display", "block");
-  }
+    function openModal(){
+      $(".modal-screen").css("display", "block");
+    }
 
-  // close modal (make it invisible)
-  function closeModal(){
-    $(".modal-screen").css("display", "none");
-  }
+  // close modal (make it invisible) --------------------
+    function closeModal(){
+      $(".modal-screen").css("display", "none");
+    }
 
+  // Expand a child -------------------------------------
+          //   change the status at the buttonbar
+          //   change the bar class
+          //   change the display of the child
+    function expandChild(bar) {
+      bar.data("status", "expanded");
+      bar.attr("class", "childExpanded");
+      bar.parent().next().css("display", "block");
+      bar.children().attr("class", "glyphicon glyphicon-minus");
+    }
+  // Expand a child ---------------------------------------------
+    function contractChild(bar) {
+      bar.data("status", "contracted");
+      bar.attr("class", "window-title expander");
+      bar.parent().next().css("display", "none");
+      bar.children().attr("class", "glyphicon glyphicon-plus");
+    }
 
-  // Expand a child
-  //   change the status at the buttonbar
-  //   change the bar class
-  //   change the display of the child
-  function expandChild(bar) {
-    bar.data("status", "expanded");
-    bar.attr("class", "childExpanded");
-    bar.parent().next().css("display", "block");
-    bar.children().attr("class", "glyphicon glyphicon-minus");
-  }
-// Expand a child
-  function contractChild(bar) {
-    bar.data("status", "contracted");
-    bar.attr("class", "window-title expander");
-    bar.parent().next().css("display", "none");
-    bar.children().attr("class", "glyphicon glyphicon-plus");
-  }
+  // creates an student yellow pill ------------------------------
+    function studentPill(stuName, parent){
+      var pillStu = $("<div>");
+      pillStu.attr("class", "student-pill pill");
+      pillStu.html(stuName);
+      parent.append(pillStu);
+    }
 
-// creates an student yellow pill
-  function studentPill(stuName, parent){
-    var pillStu = $("<div>");
-    pillStu.attr("class", "student-pill pill");
-    pillStu.html(stuName);
-    parent.append(pillStu);
-  }
+  // Temporal function to create pills from a lopp
+    var team = ["Marcelita", "Mariana", "Claribel", "Carlitos", "sonic"]
+    for(i = 0; i < team.length; i++){
+      studentPill(team[i], $(".stu-dis"));
+    }
 
-// studentPill("Marcela", $(".stu-dis"));
+    // Create the find student object and the ajax call
+      function findStudent(){
+        var find = {stuName: $("#findStuName").val()}
+        console.log(find);
+      }
+    // create the new student object and the ajax call
+      function addNewStudent(){
+        var newStudent = {
+          stuName: $("#stuIdNew").val(),
+          stuId: $("#stuNameNew").val(),
+          stuGrade: $("#stuGradeNew").val(),
+          stuTier: $("#stuTierNew").val(),
+          stuTeam: $("#stuTeamNew").val()
+        }
+        console.log(newStudent);
+      }
 
-var team = ["Marcelita", "Mariana", "Claribel", "Carlitos", "sonic"]
-for(i = 0; i < team.length; i++){
-  studentPill(team[i], $(".stu-dis"));
-}
+    // create the edit student object and the ajax call
+        function updateStudent(){
+          var editStudent = {
+            stuName: $("#stuIdEdit").val(),
+            stuId: $("#stuNameEdit").val(),
+            stuGrade: $("#stuGradeEdit").val(),
+            stuTier: $("#stuTierEdit").val(),
+            stuTeam: $("#stuTeamEdit").val()
+          }
+          console.log(editStudent);
+        }
 
-}); //End of document get ready
-// var studentApp = {
-
-// function to display the "Edit form section"
-// function to close the "Edit Student section"
-// Event handler for student pill
-
-// function that form the new student object
-// function that post the new student object
-// Event handler for New student
-
-// function to get all the students in the database
-// function to create a single student pill
-// function to render a student pill for each student in the database
-
-//funtion to display a find student modal
-// function to get the find a student object from the modal
-// function to send the request object the query object from modal
-// Event handler for type pill
-// function to close the modal
-//function to display the response object inside the edit student form-box
-
-// handler event for the student pill
-// function to request the data of the student name
-//function to display the response object inside the edit student form-box (duplicated)
-
-// function to create the edit object to request (post)
-// function to post the edit student info
-// function to inform the user that the student info was updated
-// handler event for change button
-
-// }
+});  // End of document get ready
