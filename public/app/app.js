@@ -33,6 +33,7 @@ $(document).ready(function() {
 
   // Find pill. Opens the serch modal -----------------------------
     $(".find-pill").on("click", function(){
+      $(".form-control").val("");
       openModal();
     });
 
