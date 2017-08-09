@@ -73,17 +73,12 @@ $(document).ready(function() {
     }
 
   // creates an student yellow pill ------------------------------
-    function studentPill(stuName, parent){
+    function studentPill(stuName, parent, i){
       var pillStu = $("<div>");
       pillStu.attr("class", "student-pill pill");
+      pillStu.data("index", i);
       pillStu.html(stuName);
       parent.append(pillStu);
-    }
-
-  // Temporal function to create pills from a lopp
-    var team = ["Marcelita", "Mariana", "Claribel", "Carlitos", "sonic"]
-    for(i = 0; i < team.length; i++){
-      studentPill(team[i], $(".stu-dis"));
     }
 
     // Create the find student object and the ajax call
@@ -114,5 +109,56 @@ $(document).ready(function() {
           }
           console.log(editStudent);
         }
+
+    // pass the student data to the edit form
+    function fillEditBox(index){
+      $("#stuIdEdit").val(students[index].id);
+      $("#stuNameEdit").val(students[index].name);
+      $("#stuGradeEdit").val(students[index].grade);
+      $("#stuTierEdit").val(students[index].tier);
+      $("#stuTeamEdit").val(students[index].team);
+    }
+
+// == | C | DATA FUNCTIONS =====================
+
+// Set the student object and display =======================
+    var data = [
+    	{name:"Marcela", id:7701, grade:5, tier:2, team:"" },
+    	{name:"Mariana", id:7904, grade:7, tier:2, team:"" },
+    	{name:"Claribel", id:7101, grade:3, tier:2, team:"Patotas" },
+      {name:"Carlitos", id:7201, grade:1, tier:2, team:""},
+      {name:"Sonic", id:7301, grade:"k", tier:2, team:""}
+    	];
+
+    function Student(name, id, grade, tier, team){
+    	this.name = name;
+    	this.id = id;
+    	this.grade = grade;
+    	this.team = team;
+      this.tier = tier;
+    	this.performance = "";
+    	this.counter = 2;
+    	this.addCounter = function(){
+    		return this.counter += 1;
+      	};
+      this.subsCounter = function(){
+        return this.counter +-1;
+        }
+    }
+
+    // Here a new array is creating with the method map and the constructor
+      var students = data.map(function (array){
+	     return new Student(array.name, array.id, array.grade, array.tier, array.team);
+      });
+    // Create the pills for each student in the object
+      for(i = 0; i < students.length; i++){
+        studentPill(students[i].name, $(".stu-dis"), i);
+      }
+    // Add
+      $(".student-pill").on("click", function(){
+        $("#editStudent").css("display", "block");
+        fillEditBox($(this).data("index"));
+      });
+
 
 });  // End of document get ready
