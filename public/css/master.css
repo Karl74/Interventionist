@@ -270,7 +270,7 @@ outline: 0;
   display: none;
 }
 
-/*== MODALS ===================================*/
+          /*== MODALS ===================================*/
 .modal-screen{
   display: none; /* Hidden by default */
    position: fixed; /* Stay in place */
@@ -292,4 +292,9 @@ outline: 0;
   display: flex;
   align-items: flex-start;
   justify-content: flex-end;
+}
+
+/* ======== lessons html only=========================== */
+.createAndEdit, .createNewGroup {
+  display: none;
 }

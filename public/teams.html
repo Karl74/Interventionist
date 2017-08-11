@@ -11,7 +11,7 @@
     <!-- css -->
     <link rel="stylesheet" href="css/master.css">
   </head>
-  <body>
+  <body data-file="teams">
     <div class="container">
       <div class="">
         <h1 class="window-title">Add or Edit a Team</h1>
@@ -22,10 +22,10 @@
         <div class="">
           <h4 class="section-title">Select Team or Create one</h4>
         </div>
-        <div class="pill-display">
+        <div class="pill-display group-display">
           <!-- The groups pills are dynamic displayed here -->
-          <div class="find-pill pill">
-            New Team
+          <div class="find-pill pill" id="createNewGroup">
+            New Group
           </div>
           <div class="group-pill pill">
             Sample2
@@ -33,66 +33,70 @@
         </div>
       </div>
       <!-- End of the groups spillbox -->
+      <div class="createNewGroup">
+        <div class="form-box">
+          <div class="">
+            <h4 class="section-title">Group Settings</h4>
+          </div>
 
-      <div class="form-box">
-        <div class="">
-          <h4 class="section-title">Team Settings</h4>
+          <form class="form-inline">
+            <div class="form-group">
+              <label for="teamName">Name</label>
+              <input type="text" class="form-control" id="groupName" placeholder="Group Name">
+            </div>
+
+            <div class="form-group">
+              <label for="grade">Grade</label>
+              <input type="text" class="form-control" id="teamGrade" placeholder="Team Grade">
+            </div>
+
+            <div class="form-group">
+              <label for="tier">Tier</label>
+              <input type="text" class="form-control" id="tier" placeholder="Team Tier">
+            </div>
+            <button class="btn btn-warning" type="button" id="addStudentsButton">Add Students</button>
+          </form>
         </div>
+      </div>  <!-- End of create new-->
 
-        <form class="form-inline">
-          <div class="form-group">
-            <label for="teamName">Name</label>
-            <input type="text" class="form-control" id="teamName" placeholder="Team Name">
+        <!-- | B | DISPLAY TEAM'S STUDENTS SECTION ======================  -->
+      <div class="createAndEdit">
+        <div class="pill-box">
+          <div class="">
+            <h4 class=>Click on the students names to remove them from the team</h4>
           </div>
+          <div class="pill-display allStu-dis">
+            <!-- The groups pills are dynamic displayed here -->
+            <div class="student-pill pill">
+              Student 1
+            </div>
+            <div class="student-pill pill">
+              Student 2
+            </div>
+          </div>
+        </div>  <!-- Enf of students in the team -->
 
-          <div class="form-group">
-            <label for="grade">Grade</label>
-            <input type="text" class="form-control" id="teamGrade" placeholder="Team Grade">
+        <!-- | B | DISPLAY AVAILABLE STUDENTS SECTION ======================  -->
+        <div class="pill-box">
+          <div class="">
+            <h4 class=>Click on the students names to add them to the team</h4>
           </div>
+          <div class="pill-display teamStu-dis">
+            <!-- The groups pills are dynamic displayed here -->
+            <div class="find-pill pill">
+              find
+            </div>
+            <div class="student-pill pill">
+              Student 2
+            </div>
+          </div>
+        </div>  <!-- Enf of available students section -->
+        <button type="submit" class="btn btn-default">New / Update Team</button>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"
+          integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+          crossorigin="anonymous"></script>
+    </div> <!-- End create or edit settings section       -->
 
-          <div class="form-group">
-            <label for="tier">Tier</label>
-            <input type="text" class="form-control" id="tier" placeholder="Team Tier">
-          </div>
-
-        </form>
-      </div> <!-- End of create edit a team info form -->
-
-      <!-- | B | DISPLAY TEAM'S STUDENTS SECTION ======================  -->
-      <div class="pill-box">
-        <div class="">
-          <h4 class=>Click on the students names to remove them from the team</h4>
-        </div>
-        <div class="pill-display stu-dis">
-          <!-- The groups pills are dynamic displayed here -->
-          <div class="student-pill pill">
-            Student 1
-          </div>
-          <div class="student-pill pill">
-            Student 2
-          </div>
-        </div>
-      </div>  <!-- Enf of students in the team -->
-
-      <!-- | B | DISPLAY AVAILABLE STUDENTS SECTION ======================  -->
-      <div class="pill-box">
-        <div class="">
-          <h4 class=>Click on the students names to add them to the team</h4>
-        </div>
-        <div class="pill-display">
-          <!-- The groups pills are dynamic displayed here -->
-          <div class="find-pill pill">
-            find
-          </div>
-          <div class="student-pill pill">
-            Student 2
-          </div>
-        </div>
-      </div>  <!-- Enf of available students section -->
-      <button type="submit" class="btn btn-default">New / Update Team</button>
-      <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"
-        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        crossorigin="anonymous"></script>
       <script type="text/javascript" src="app/app.js"></script>
 
     </div> <!-- END OF CONTAINER -->
