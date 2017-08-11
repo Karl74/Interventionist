@@ -164,7 +164,7 @@ $(document).ready(function() {
     }
   }
 
-  // Display students belongs to the activeTeam
+  // Display all students pills that belongs to the activeTeam
   function includedOnActiveTeam(){
     for(i = 0; i < students.length; i++){
       if(students[i].team == activeTeam){
@@ -172,8 +172,8 @@ $(document).ready(function() {
       }
     }
     $(".student-pill").on("click", function(){
-      updateStudentGroup($(this).data("index"));
-      $(".teamStu-dis").append($(this));
+      moveStudentToGroup($(this));
+      // $(".teamStu-dis").append($(this));
     });
   }
   // Clear the student pill display from previous groups
@@ -182,12 +182,17 @@ $(document).ready(function() {
       $(".teamStu-dis").empty();
     }
 
-  // Add or update the group of the student
-    function updateStudentGroup(index){
-      console.log(index);
-      students[index].team = activeTeam;
-      console.log(students[index]);
-
+  // Moves the student pill between active team box and all students box
+    function moveStudentToGroup(pill){
+      if(pill.data("included")){
+        pill.data("included", false);
+        $("#notMembers").append(pill);
+        console.log("is  a member now");
+      } else {
+        console.log("is not even here");
+        $("#members").append(pill);
+        pill.data("included", true);
+        }
     }
 
 // == | C | EVENT HANDLERS  ==================================
