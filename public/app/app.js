@@ -1,6 +1,6 @@
 $(document).ready(function() {
   console.log("It's alive!!!!!");
-
+  var activeTeam = "not assigned";
 //  == | A | FUNCTIONS ==================================
   //  == | A.1 | FUNCTIONS for students.html==================
   // Make modal visible
@@ -92,12 +92,29 @@ $(document).ready(function() {
       givenClass.css("display", "block");
     }
 
+    function hideASection(givenClass){
+      givenClass.css("display", "none");
+    }
+
+    function setActiveTeam(pill){
+      hideASection($("#addStudentsButton"));
+      $("#groupName").val(teams[pill.data("index")].name);
+    }
+
+    function listMembers(){
+      var includedPills = $("#members").children();
+      console.log("testing");
+      for(i = 0; i < includedPills; i++ ){
+        console.log(includedPills.data("index"));
+
+      }
+    }
 // == | B | DATA FUNCTIONS =====================
 
   // Set the student object and display =======================
   // Inlue of ajax call
     var data = [
-    	{name:"Marcela", id:7701, grade:5, tier:2, team:"NotAsigned" },
+    	{name:"Marcela", id:7701, grade:5, tier:2, team:"Fifth B" },
     	{name:"Mariana", id:7904, grade:7, tier:2, team:"NotAsigned" },
     	{name:"Claribel", id:7101, grade:3, tier:2, team:"Patotas" },
       {name:"Carlitos", id:7201, grade:1, tier:2, team:"NotAsigned"},
@@ -124,7 +141,9 @@ $(document).ready(function() {
 	     return new Student(array.name, array.id, array.grade, array.tier, array.team);
       });
 
-      var activeTeam = "not assigned";
+      // var activeTeam = "not assigned";
+
+  // Sets the event handler for student pills for each html file
       switch ($("body").data("file")) {
         case "student":
               console.log("this is the student file");
@@ -254,11 +273,15 @@ $(document).ready(function() {
         }
       });
 
-  // == | C | EVENT HANDLERS for teams.html ==================================
+// == | C | EVENT HANDLERS for teams.html ==================================
+    // NEW GROUP PILL. Displays the new group form
       $("#createNewGroup").on("click", function(){
+        hideASection($(".createAndEdit"));
+        showASection($("#addStudentsButton"));
         showASection($(".createNewGroup"));
+        $("#groupName").val("");
       });
-
+  // ADD STUDENT BUTTON ON NEW STUDENT FORM. Display the boxes with the students pills
       $("#addStudentsButton").on("click", function(){
         clearStudentsPills()
         showASection($(".createAndEdit"));
@@ -268,7 +291,22 @@ $(document).ready(function() {
         includedOnActiveTeam();
       });
 
+    // GROUP PILL. Display student pill boxes and forms
+      $(".group-pill").on("click", function(){
+        clearStudentsPills()
+        showASection($(".createNewGroup"));
+        showASection($(".createAndEdit"));
+        setActiveTeam($(this));
+        activeTeam = $("#groupName").val();
+        console.log(activeTeam);
+        console.log(activeTeam);
+        excludedFromActiveTeam();
+        includedOnActiveTeam();
+      })
 
-
+    // SAVE CHANGES BUTTON. Saves the group or ner group settings
+    $("#saveGroup").on("click", function(){
+      listMembers();
+    });
 
 });  // End of document get ready
