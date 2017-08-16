@@ -1,6 +1,7 @@
 $(document).ready(function() {
   console.log("It's alive!!!!!");
   var activeTeam = "not assigned";
+
 //  == | A | FUNCTIONS ==================================
   //  == | A.1 | FUNCTIONS for students.html==================
   // Make modal visible
@@ -35,6 +36,7 @@ $(document).ready(function() {
     function studentPill(stuName, parent, i){
       var pillStu = $("<div>");
       pillStu.attr("class", "student-pill pill");
+      pillStu.attr("id", stuName);
       pillStu.data("index", i);
       pillStu.html(stuName);
       parent.append(pillStu);
@@ -79,6 +81,13 @@ $(document).ready(function() {
     }
 
 //  == | A.1 | FUNCTIONS for teams.html==================
+  var newGroupObject = {
+    groupName:"",
+    groupGrade:"",
+    groupTier:"",
+    groupStudents: []
+  }
+
   // Displays all the groups pills inside a div
     function groupPill(groupName, parent, i){
       var pillGroup = $("<div>");
@@ -99,15 +108,22 @@ $(document).ready(function() {
     function setActiveTeam(pill){
       hideASection($("#addStudentsButton"));
       $("#groupName").val(teams[pill.data("index")].name);
+      $("#teamGrade").val(teams[pill.data("index")].grade);
+      $("#tier").val(teams[pill.data("index")].tier);
     }
 
+    //GET AL THE STUDENT NAMES INIDE THE NEW TEAM STUDENT BOX
     function listMembers(){
-      var includedPills = $("#members").children();
-      console.log("testing");
-      for(i = 0; i < includedPills; i++ ){
-        console.log(includedPills.data("index"));
-
+      newGroupObject.groupStudents = [];
+      for(i=0; i<$("#members").children().length; i++){
+        newGroupObject.groupStudents.push($("#members").children()[i].id);
       }
+    }
+
+    function populateGroupObject(){
+      newGroupObject.groupName = $("#groupName").val();
+      newGroupObject.groupGrade= $("#teamGrade").val();
+      newGroupObject.groupTier= $("#tier").val();
     }
 // == | B | DATA FUNCTIONS =====================
 
@@ -165,9 +181,9 @@ $(document).ready(function() {
     // inlue of ajax call
     var teams = [
       {name: "Fifth A" , grade:5 ,tier:2},
-      {name: "Fifth B" , grade:5 ,tier:2},
-      {name: "Fourth A" , grade:5 ,tier:2},
-      {name: "Fourth B" , grade:5 ,tier:2}
+      {name: "Fifth B" , grade:5 ,tier:3},
+      {name: "Fourth A" , grade:4 ,tier:2},
+      {name: "Fourth B" , grade:4 ,tier:3}
     ];
 
     for(i = 0; i <teams.length; i++){
@@ -190,10 +206,11 @@ $(document).ready(function() {
         studentPill(students[i].name, $(".teamStu-dis"), i);
       }
     }
-    $(".student-pill").on("click", function(){
-      moveStudentToGroup($(this));
-      // $(".teamStu-dis").append($(this));
-    });
+        // EVENT. STUDENTPILL. Moves the pill to a different container
+        $(".student-pill").on("click", function(){
+          moveStudentToGroup($(this));
+          // $(".teamStu-dis").append($(this));
+        });
   }
   // Clear the student pill display from previous groups
     function clearStudentsPills(){
@@ -280,6 +297,8 @@ $(document).ready(function() {
         showASection($("#addStudentsButton"));
         showASection($(".createNewGroup"));
         $("#groupName").val("");
+        $("#teamGrade").val("");
+        $("#tier").val("");
       });
   // ADD STUDENT BUTTON ON NEW STUDENT FORM. Display the boxes with the students pills
       $("#addStudentsButton").on("click", function(){
@@ -299,14 +318,16 @@ $(document).ready(function() {
         setActiveTeam($(this));
         activeTeam = $("#groupName").val();
         console.log(activeTeam);
-        console.log(activeTeam);
         excludedFromActiveTeam();
         includedOnActiveTeam();
       })
 
+
     // SAVE CHANGES BUTTON. Saves the group or ner group settings
     $("#saveGroup").on("click", function(){
       listMembers();
+      populateGroupObject();
+      console.log(newGroupObject);
     });
 
 });  // End of document get ready
