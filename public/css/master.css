@@ -91,6 +91,19 @@ button {
   border-bottom:1px solid rgba(0,0,0,0.1);
 }
 
+.ovalPill{
+  margin:4px;
+  width: 65px;
+  height: 30px;
+  font-weight:bold;
+  text-shadow: rgba(255,255,255,.5) 0px 1px 0;
+  border-radius: 47%;
+  padding-top: 4px;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.8);
+  border-bottom:1px solid rgba(0,0,0,0.1);
+}
+
 .student-pill{
   color: hsl(39, 100%, 30%)!important;
   background-color: hsl(39, 100%, 50%);
@@ -231,7 +244,7 @@ button {
   justify-content:flex-start;
 }
 
-#assignGrades{
+.assignGrades{
   display: flex;
   justify-content:flex-start;
 }
@@ -271,7 +284,12 @@ outline: 0;
   display: none;
 }
 
-          /*== MODALS ===================================*/
+tr{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+/*== MODALS ===================================*/
 .modal-screen{
   display: none; /* Hidden by default */
    position: fixed; /* Stay in place */

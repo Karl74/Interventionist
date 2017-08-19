@@ -13,9 +13,9 @@
   <link rel="stylesheet" href="css/master.css">
 </head>
 
-<body>
+<body data-file="evaluations">
 
-  <div class="container">
+  <div class="container-fluid">
     <div class="">
       <h1 class="window-title">Add an Evaluation</h1>
     </div>
@@ -25,7 +25,7 @@
       <div class="">
         <h4 class=>Select a group</h4>
       </div>
-      <div class="pill-display">
+      <div class="pill-display group-display">
         <!-- The groups pills are dynamic displayed here -->
         <div class="find-pill pill">
           Type Name
@@ -70,21 +70,22 @@
         <h4 class="section-subtitle-data" id="displayevDate">&nbsp; Sept 25th</h4>
       </div>
 
-      <table class="table">
+      <table class="table" id="evalTable">
         <tr>
           <th>Students</th>
           <th>Score / Grade </th>
+          <th>Input</th>
         </tr>
-        <tr>
+        <tr id="one">
           <td><div class="student-pill pill">Student1</div></td>
           <td>
-            <div id="assignGrades">
-              <div class="input-pill pill">50/F</div>
-              <div class="input-pill pill">60/D</div>
-              <div class="input-pill pill">70/C</div>
-              <div class="input-pill pill">80/B</div>
-              <div class="input-pill pill">90/A</div>
-              <div class="input-pill pill">100/ A+</div>
+            <div class="assignGrades">
+              <div class="input-pill ovalPill">50/F</div>
+              <div class="input-pill ovalPill">60/D</div>
+              <div class="input-pill ovalPill">70/C</div>
+              <div class="input-pill ovalPill">80/B</div>
+              <div class="input-pill ovalPill">90/A</div>
+              <div class="input-pill ovalPill">100/ A+</div>
           </div>
           </td>
         </tr>

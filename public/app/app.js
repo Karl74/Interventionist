@@ -80,7 +80,7 @@ $(document).ready(function() {
       $("#stuTeamEdit").val(students[index].team);
     }
 
-//  == | A.1 | FUNCTIONS for teams.html==================
+//  == | A.2 | FUNCTIONS for teams.html==================
   var newGroupObject = {
     groupName:"",
     groupGrade:"",
@@ -104,7 +104,8 @@ $(document).ready(function() {
     function hideASection(givenClass){
       givenClass.css("display", "none");
     }
-
+// Params $.(this) clicked pill. -Hides the students pill displays. -Gets the name,
+// grade and tier of the selected team. -Displays inside the imput elements.
     function setActiveTeam(pill){
       hideASection($("#addStudentsButton"));
       $("#groupName").val(teams[pill.data("index")].name);
@@ -125,6 +126,72 @@ $(document).ready(function() {
       newGroupObject.groupGrade= $("#teamGrade").val();
       newGroupObject.groupTier= $("#tier").val();
     }
+
+//  == | A.3 | FUNCTIONS for evaluations.html==================
+  var evalStudent =  {
+    name:"Myname",
+    id:"",
+    evalGrade: 0,
+    ownRow: $("<tr>"),
+    tableData: $("<td>"),
+    studPill: $("<div>"),
+    createStudentPill: function(){
+      this.studPill.attr("class", "student-pill pill");
+      this.studPill.html(this.name);
+    },
+    createStudentRow: function(){
+      $("#evalTable").append(this.ownRow);
+      this.ownRow.append(this.tableData);
+      this.createStudentPill();
+      this.tableData.append(this.studPill);
+      this.ownRow.append(this.tableDataControlls);
+      this.createGradePills();
+      this.ownRow.append(this.gradeDisplay);
+    },
+    tableDataControlls: $("<td>"),
+    gradePills:[
+      {name:"50/F", value:50},
+      {name:"60/D", value:60},
+      {name:"70/C", value:70},
+      {name:"80/B", value:80},
+      {name:"90/A", value:90},
+      {name:"100/A+", value: 100}
+    ],
+    createGradePills: function(){
+      var test1= 11111111111111111111111110;
+      var pillsContainer = $("<div>");
+      pillsContainer.attr("class", "assignGrades");
+      this.tableDataControlls.append(pillsContainer);
+
+      for(i = 0; i < this.gradePills.length; i++){
+        var pill = $("<div>");
+        pill.html(this.gradePills[i].name);
+        pill.attr("class", "input-pill ovalPill");
+        pill.data("value", this.gradePills[i].value);
+        pillsContainer.append(pill);
+      }
+      $(".ovalPill").on("click", function(){
+      test1 =$(this).data("value");
+      console.log(test1);
+    })
+
+    this.displayGradevalue(test1);
+    },
+    gradeDisplay: $("<input>"),
+    assignedGrade: "nr",
+    displayGradevalue: function(arg){
+      console.log("hello from call back");
+      console.log(arg)
+    }
+  }   // End of evalStudent  object
+
+//temporal callers
+evalStudent.createStudentRow();
+var test = $("<input>");
+$("#one").append(test);
+
+// End of temporal callers
+
 // == | B | DATA FUNCTIONS =====================
 
   // Set the student object and display =======================
@@ -177,7 +244,7 @@ $(document).ready(function() {
           break;
       }
 
-// ===== | B.1 | TEAMS DATA FUNCTIONS
+// ===== | B.1 | TEAMS DATA FUNCTIONS =====================================
     // inlue of ajax call
     var teams = [
       {name: "Fifth A" , grade:5 ,tier:2},
@@ -230,9 +297,22 @@ $(document).ready(function() {
         pill.data("included", true);
         }
     }
+// ===== | B.2 | Evaluation.html DATA FUNCTIONS ============================
+    // Parameters $(this) --> the clicked pill.
+      // Displays the team name at the evaluation title.
+      // Displays the current date at the input box.
+      function setTeamToEvaluate(pill){
+          $("#teamName").html(teams[pill.data("index")].name);
+          var date = new Date();
+          $("#evDate").val(date.toDateString());
+      }
+
+
+
+
 
 // == | C | EVENT HANDLERS  ==================================
-  // == | C | EVENT HANDLERS for Student.html ==================================
+  // == | C.1 | EVENT HANDLERS for Student.html ==================================
 
   // Blue large buttons. Expands or contracts divs whith pills---------------------
     $(".headBar").on("click", function() {
@@ -286,11 +366,11 @@ $(document).ready(function() {
         } else//($("body").data("file") == "teams")
         {
           // activeTeam = $("#groupName").val();
-          console.log("hello");
+          console.log("no event asssigned");
         }
       });
 
-// == | C | EVENT HANDLERS for teams.html ==================================
+// == | C.2 | EVENT HANDLERS for teams.html ==================================
     // NEW GROUP PILL. Displays the new group form
       $("#createNewGroup").on("click", function(){
         hideASection($(".createAndEdit"));
@@ -312,15 +392,26 @@ $(document).ready(function() {
 
     // GROUP PILL. Display student pill boxes and forms
       $(".group-pill").on("click", function(){
-        clearStudentsPills()
-        showASection($(".createNewGroup"));
-        showASection($(".createAndEdit"));
-        setActiveTeam($(this));
-        activeTeam = $("#groupName").val();
-        console.log(activeTeam);
-        excludedFromActiveTeam();
-        includedOnActiveTeam();
+        switch ($("body").data("file")) {
+          case "teams":
+            clearStudentsPills()
+            showASection($(".createNewGroup"));
+            showASection($(".createAndEdit"));
+            setActiveTeam($(this));
+            activeTeam = $("#groupName").val();
+            console.log(activeTeam);
+            excludedFromActiveTeam();
+            includedOnActiveTeam();
+          break;
+
+          case "evaluations":
+          console.log("hello guys!");
+          setTeamToEvaluate($(this));
+          //create the students pills and controls
+          // create the evalution object
+        }
       })
+
 
 
     // SAVE CHANGES BUTTON. Saves the group or ner group settings
@@ -329,5 +420,7 @@ $(document).ready(function() {
       populateGroupObject();
       console.log(newGroupObject);
     });
+
+  // == | C.3 | EVENT HANDLERS for Evaluation.html ==================================
 
 });  // End of document get ready
