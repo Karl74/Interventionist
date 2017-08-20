@@ -147,6 +147,7 @@ $(document).ready(function() {
       this.ownRow.append(this.tableDataControlls);
       this.createGradePills();
       this.ownRow.append(this.gradeDisplay);
+
     },
     tableDataControlls: $("<td>"),
     gradePills:[
@@ -158,7 +159,7 @@ $(document).ready(function() {
       {name:"100/A+", value: 100}
     ],
     createGradePills: function(){
-      var test1= 11111111111111111111111110;
+      var test1= 111111111111;
       var pillsContainer = $("<div>");
       pillsContainer.attr("class", "assignGrades");
       this.tableDataControlls.append(pillsContainer);
@@ -171,18 +172,13 @@ $(document).ready(function() {
         pillsContainer.append(pill);
       }
       $(".ovalPill").on("click", function(){
-      test1 =$(this).data("value");
-      console.log(test1);
-    })
-
-    this.displayGradevalue(test1);
+      evalStudent.gradeDisplay.val($(this).data("value"));
+      console.log(evalStudent.gradeDisplay.val());
+      })
     },
+
     gradeDisplay: $("<input>"),
     assignedGrade: "nr",
-    displayGradevalue: function(arg){
-      console.log("hello from call back");
-      console.log(arg)
-    }
   }   // End of evalStudent  object
 
 //temporal callers
@@ -308,9 +304,6 @@ $("#one").append(test);
       }
 
 
-
-
-
 // == | C | EVENT HANDLERS  ==================================
   // == | C.1 | EVENT HANDLERS for Student.html ==================================
 
@@ -411,8 +404,6 @@ $("#one").append(test);
           // create the evalution object
         }
       })
-
-
 
     // SAVE CHANGES BUTTON. Saves the group or ner group settings
     $("#saveGroup").on("click", function(){
