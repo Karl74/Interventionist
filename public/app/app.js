@@ -1,4 +1,4 @@
-$(document).ready(function() {
+  $(document).ready(function() {
   console.log("It's alive!!!!!");
   var activeTeam = "not assigned";
 
@@ -14,7 +14,7 @@ $(document).ready(function() {
       $(".modal-screen").css("display", "none");
     }
 
-  // Expand a child -------------------------------------
+  // Parameters. html element to expand. Expand a child -------------------------------------
           //   change the status at the buttonbar
           //   change the bar class
           //   change the display of the child
@@ -24,7 +24,7 @@ $(document).ready(function() {
       bar.parent().next().css("display", "block");
       bar.children().attr("class", "glyphicon glyphicon-minus");
     }
-  // Expand a child ---------------------------------------------
+  // Parameters. html element to cpmtracts. Contracts a child ---------------------------------------------
     function contractChild(bar) {
       bar.data("status", "contracted");
       bar.attr("class", "window-title expander");
@@ -32,7 +32,7 @@ $(document).ready(function() {
       bar.children().attr("class", "glyphicon glyphicon-plus");
     }
 
-  // creates an student yellow pill ------------------------------
+  // Params: ??????  creates an student yellow pill ------------------------------
     function studentPill(stuName, parent, i){
       var pillStu = $("<div>");
       pillStu.attr("class", "student-pill pill");
@@ -128,65 +128,6 @@ $(document).ready(function() {
     }
 
 //  == | A.3 | FUNCTIONS for evaluations.html==================
-  var evalStudent =  {
-    name:"Myname",
-    id:"",
-    evalGrade: 0,
-    ownRow: $("<tr>"),
-    tableData: $("<td>"),
-    studPill: $("<div>"),
-    createStudentPill: function(){
-      this.studPill.attr("class", "student-pill pill");
-      this.studPill.html(this.name);
-    },
-    createStudentRow: function(){
-      $("#evalTable").append(this.ownRow);
-      this.ownRow.append(this.tableData);
-      this.createStudentPill();
-      this.tableData.append(this.studPill);
-      this.ownRow.append(this.tableDataControlls);
-      this.createGradePills();
-      this.ownRow.append(this.gradeDisplay);
-
-    },
-    tableDataControlls: $("<td>"),
-    gradePills:[
-      {name:"50/F", value:50},
-      {name:"60/D", value:60},
-      {name:"70/C", value:70},
-      {name:"80/B", value:80},
-      {name:"90/A", value:90},
-      {name:"100/A+", value: 100}
-    ],
-    createGradePills: function(){
-      var test1= 111111111111;
-      var pillsContainer = $("<div>");
-      pillsContainer.attr("class", "assignGrades");
-      this.tableDataControlls.append(pillsContainer);
-
-      for(i = 0; i < this.gradePills.length; i++){
-        var pill = $("<div>");
-        pill.html(this.gradePills[i].name);
-        pill.attr("class", "input-pill ovalPill");
-        pill.data("value", this.gradePills[i].value);
-        pillsContainer.append(pill);
-      }
-      $(".ovalPill").on("click", function(){
-      evalStudent.gradeDisplay.val($(this).data("value"));
-      console.log(evalStudent.gradeDisplay.val());
-      })
-    },
-
-    gradeDisplay: $("<input>"),
-    assignedGrade: "nr",
-  }   // End of evalStudent  object
-
-//temporal callers
-evalStudent.createStudentRow();
-var test = $("<input>");
-$("#one").append(test);
-
-// End of temporal callers
 
 // == | B | DATA FUNCTIONS =====================
 
@@ -194,12 +135,17 @@ $("#one").append(test);
   // Inlue of ajax call
     var data = [
     	{name:"Marcela", id:7701, grade:5, tier:2, team:"Fifth B" },
-    	{name:"Mariana", id:7904, grade:7, tier:2, team:"NotAsigned" },
-    	{name:"Claribel", id:7101, grade:3, tier:2, team:"Patotas" },
-      {name:"Carlitos", id:7201, grade:1, tier:2, team:"NotAsigned"},
-      {name:"Sonic", id:7301, grade:"k", tier:2, team:"NotAsigned"}
+    	{name:"Mariana", id:7904, grade:7, tier:2, team:"Fifth B" },
+    	{name:"Claribel", id:7101, grade:3, tier:2, team:"Fourth A" },
+      {name:"Carlitos", id:7201, grade:1, tier:2, team:"Fifth B"},
+      {name:"Sonic", id:7301, grade:"k", tier:2, team:"Fourth A"},
+      {name:"Pepe", id:7401, grade:"k", tier:2, team:"Fourth A"},
+      {name:"Toño", id:7501, grade:"k", tier:2, team:"Fourth A"},
+      {name:"Concha", id:7601, grade:"k", tier:2, team:"Fourth B"},
+      {name:"Pablito", id:7691, grade:"k", tier:2, team:"Fifth A"}
     	];
 
+// STUDENT OBJECT CONSTRUCTOR
     function Student(name, id, grade, tier, team){
     	this.name = name;
     	this.id = id;
@@ -214,6 +160,53 @@ $("#one").append(test);
       this.subsCounter = function(){
         return this.counter +-1;
         }
+        this.evalGrade = 0;
+        this.ownRow = $("<tr>");
+        this.tableData = $("<td>");
+        this.studPill = $("<div>");
+        this.createStudentPill = function(){
+            this.studPill.attr("class", "student-pill pill");
+            this.studPill.html(this.name);
+          };
+        this.createStudentRow = function(){
+            $("#evalTable").append(this.ownRow);
+            this.ownRow.append(this.tableData);
+            this.createStudentPill();
+            this.tableData.append(this.studPill);
+            this.ownRow.append(this.tableDataControlls);
+            this.createGradePills();
+            this.ownRow.append(this.gradeDisplay);
+          };
+        this.tableDataControlls = $("<td>");
+        this.gradePills = [
+            {name:"50/F", value:50},
+            {name:"60/D", value:60},
+            {name:"70/C", value:70},
+            {name:"80/B", value:80},
+            {name:"90/A", value:90},
+            {name:"100/A+", value: 100}
+          ];
+        this.createGradePills = function(){
+            var pillsContainer = $("<div>");
+            pillsContainer.attr("class", "assignGrades");
+            this.tableDataControlls.append(pillsContainer);
+
+            for(i = 0; i < this.gradePills.length; i++){
+                var pill = $("<div>");
+                pill.html(this.gradePills[i].name);
+                pill.attr("class", "input-pill ovalPill");
+                pill.data("value", this.gradePills[i].value);
+                pillsContainer.append(pill);
+              }
+
+            $(".ovalPill").on("click", function(){
+              evalStudent.gradeDisplay.val($(this).data("value"));
+              console.log(evalStudent.gradeDisplay.val());
+            })
+          };
+        this.gradeDisplay = $("<input>");
+        this.assignedGrade = "nr";
+
     }
     // Here a new array is creating with the method map and the constructor
       var students = data.map(function (array){
@@ -249,6 +242,7 @@ $("#one").append(test);
       {name: "Fourth B" , grade:4 ,tier:3}
     ];
 
+// COMMON LOOP Creates the groups for teams.htlm, lessons.html and  evaluations.html
     for(i = 0; i <teams.length; i++){
       groupPill(teams[i].name, $(".group-display"), i);
     }
@@ -296,13 +290,29 @@ $("#one").append(test);
 // ===== | B.2 | Evaluation.html DATA FUNCTIONS ============================
     // Parameters $(this) --> the clicked pill.
       // Displays the team name at the evaluation title.
-      // Displays the current date at the input box.
+      // Displays the current date at the input box.()
       function setTeamToEvaluate(pill){
           $("#teamName").html(teams[pill.data("index")].name);
           var date = new Date();
           $("#evDate").val(date.toDateString());
       }
 
+      // Parameters |-name of the group (pill) |-students data(ajax)
+      // creates an array with the student object for each member of the group
+      function callGroupStudents(pill){
+        $("td").remove();
+        activeTeam = teams[pill.data("index")].name;
+        console.log("this is the active team" + activeTeam);
+        students[1].createStudentRow();
+
+
+        for (i = 0; i < students.length; i++){
+          if(students[i].team == activeTeam){
+            console.log(students[i].name + " is here");
+            // console.log(students[i]);
+          }
+        }
+      }
 
 // == | C | EVENT HANDLERS  ==================================
   // == | C.1 | EVENT HANDLERS for Student.html ==================================
@@ -398,8 +408,8 @@ $("#one").append(test);
           break;
 
           case "evaluations":
-          console.log("hello guys!");
           setTeamToEvaluate($(this));
+          callGroupStudents($(this));
           //create the students pills and controls
           // create the evalution object
         }
