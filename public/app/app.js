@@ -134,9 +134,9 @@
   // Set the student object and display =======================
   // Inlue of ajax call
     var data = [
-    	{name:"Marcela", id:7701, grade:5, tier:2, team:"Fifth B" },
-    	{name:"Mariana", id:7904, grade:7, tier:2, team:"Fifth B" },
-    	{name:"Claribel", id:7101, grade:3, tier:2, team:"Fourth A" },
+    	{name:"Marcela", id:7701, grade:5, tier:2, team:"Fifth B"},
+    	{name:"Mariana", id:7904, grade:7, tier:2, team:"Fifth B"},
+    	{name:"Claribel", id:7101, grade:3, tier:2, team:"Fourth A"},
       {name:"Carlitos", id:7201, grade:1, tier:2, team:"Fifth B"},
       {name:"Sonic", id:7301, grade:"k", tier:2, team:"Fourth A"},
       {name:"Pepe", id:7401, grade:"k", tier:2, team:"Fourth A"},
@@ -161,23 +161,25 @@
         return this.counter +-1;
         }
         this.evalGrade = 0;
-        this.ownRow = $("<tr>");
-        this.tableData = $("<td>");
+        this.studentControl = $("<div>");
+        // this.tableData = $("<td>");
         this.studPill = $("<div>");
         this.createStudentPill = function(){
             this.studPill.attr("class", "student-pill pill");
             this.studPill.html(this.name);
           };
         this.createStudentRow = function(){
-            $("#evalTable").append(this.ownRow);
-            this.ownRow.append(this.tableData);
+            this.studentControl.attr("class", "studentControl");
+            $("#evalTable").append(this.studentControl);
             this.createStudentPill();
-            this.tableData.append(this.studPill);
-            this.ownRow.append(this.tableDataControlls);
+            this.studentControl.append(this.studPill);
+            // this.tableData.append(this.studPill);
+            this.studentControl.append(this.tableDataControlls);
             this.createGradePills();
-            this.ownRow.append(this.gradeDisplay);
+            this.gradeDisplay.data("id", this.id);
+            this.studentControl.append(this.gradeDisplay);
           };
-        this.tableDataControlls = $("<td>");
+        // this.tableDataControlls = $("<td>");
         this.gradePills = [
             {name:"50/F", value:50},
             {name:"60/D", value:60},
@@ -186,25 +188,25 @@
             {name:"90/A", value:90},
             {name:"100/A+", value: 100}
           ];
+          this.gradeDisplay = $("<input>");
         this.createGradePills = function(){
             var pillsContainer = $("<div>");
             pillsContainer.attr("class", "assignGrades");
-            this.tableDataControlls.append(pillsContainer);
+            this.studentControl.append(pillsContainer);
 
-            for(i = 0; i < this.gradePills.length; i++){
+            for(a = 0; a < this.gradePills.length; a++){
                 var pill = $("<div>");
-                pill.html(this.gradePills[i].name);
+                pill.html(this.gradePills[a].name);
                 pill.attr("class", "input-pill ovalPill");
-                pill.data("value", this.gradePills[i].value);
+                pill.data("value", this.gradePills[a].value);
                 pillsContainer.append(pill);
               }
 
-            $(".ovalPill").on("click", function(){
-              evalStudent.gradeDisplay.val($(this).data("value"));
-              console.log(evalStudent.gradeDisplay.val());
-            })
+            // $(".ovalPill").on("click", function(){
+            //   console.log("hello");
+            // })
           };
-        this.gradeDisplay = $("<input>");
+
         this.assignedGrade = "nr";
 
     }
@@ -295,21 +297,23 @@
           $("#teamName").html(teams[pill.data("index")].name);
           var date = new Date();
           $("#evDate").val(date.toDateString());
+            activeTeam = "empty"
+          $("#evalTable").empty();
+          $("#pill").remove();
       }
 
       // Parameters |-name of the group (pill) |-students data(ajax)
       // creates an array with the student object for each member of the group
       function callGroupStudents(pill){
-        $("td").remove();
+        $("#evalTable").empty();
         activeTeam = teams[pill.data("index")].name;
         console.log("this is the active team" + activeTeam);
-        students[1].createStudentRow();
-
 
         for (i = 0; i < students.length; i++){
           if(students[i].team == activeTeam){
             console.log(students[i].name + " is here");
-            // console.log(students[i]);
+            console.log(students[i]);
+            students[i].createStudentRow();
           }
         }
       }
@@ -423,5 +427,7 @@
     });
 
   // == | C.3 | EVENT HANDLERS for Evaluation.html ==================================
-
+  $(".ovalPill").on("click", function(){
+    console.log("hello");
+  })
 });  // End of document get ready

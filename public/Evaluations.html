@@ -70,17 +70,18 @@
         <h4 class="section-subtitle-data" id="displayevDate">&nbsp; Sept 25th</h4>
       </div>
 
-      <table class="table">
-        <tr>
-          <th>Students</th>
-          <th>Score / Grade </th>
-          <th>Input</th>
-        </tr>
-        <div id="evalTable">
-        <tr>
-          <td><div class="student-pill pill">Student1</div></td>
-          <td>
-            <div class="assignGrades">
+      <div class="controls-titles">
+          <h5>Students</h5>
+          <h5>Score / Grade </h5>
+          <h5>Input</h5>
+      </div>
+
+      <div id="evalTable">
+
+        <div class="studentControl">
+          <div class="student-pill pill">Student1</div>
+
+          <div class="assignGrades">
               <div class="input-pill ovalPill">50/F</div>
               <div class="input-pill ovalPill">60/D</div>
               <div class="input-pill ovalPill">70/C</div>
@@ -88,10 +89,11 @@
               <div class="input-pill ovalPill">90/A</div>
               <div class="input-pill ovalPill">100/ A+</div>
           </div>
-          </td>
-        </tr>
+
+          <input type="text" id="try" value="">
+        </div>
       </div>
-      </table>
+
     </div>
 <button class="btn btn-default pull-right" type="button" name="button">Submit Evaluation Results</button>
   </div>  <!-- End of container -->
