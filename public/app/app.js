@@ -154,68 +154,115 @@
       this.tier = tier;
     	this.performance = "";
     	this.counter = 2;
-    	this.addCounter = function(){
+      this.evalGrade = 0;
+      // this.studPill = $("<div>");
+      this.gradeToDisplay = "";
+      this.assignedGrade = "nr";
+
+      this.addCounter = function(){
+        //ATRIBUTES: none.
+        //f: increase variable counter by 1
     		return this.counter += 1;
-      	};
+    	};
+
       this.subsCounter = function(){
         return this.counter +-1;
-        }
-        this.evalGrade = 0;
-        this.studentControl = $("<div>");
-        // this.tableData = $("<td>");
-        this.studPill = $("<div>");
-        this.createStudentPill = function(){
-            this.studPill.attr("class", "student-pill pill");
-            this.studPill.html(this.name);
-          };
-        this.createStudentRow = function(){
-            this.studentControl.attr("class", "studentControl");
-            $("#evalTable").append(this.studentControl);
-            this.createStudentPill();
-            this.studentControl.append(this.studPill);
-            // this.tableData.append(this.studPill);
-            this.studentControl.append(this.tableDataControlls);
-            this.createGradePills();
-            this.gradeDisplay.data("id", this.id);
-            this.studentControl.append(this.gradeDisplay);
-          };
-        // this.tableDataControlls = $("<td>");
-        this.gradePills = [
-            {name:"50/F", value:50},
-            {name:"60/D", value:60},
-            {name:"70/C", value:70},
-            {name:"80/B", value:80},
-            {name:"90/A", value:90},
-            {name:"100/A+", value: 100}
-          ];
-          this.gradeDisplay = $("<input>");
-        this.createGradePills = function(){
-            var pillsContainer = $("<div>");
-            pillsContainer.attr("class", "assignGrades");
-            this.studentControl.append(pillsContainer);
+      };
 
-            for(a = 0; a < this.gradePills.length; a++){
-                var pill = $("<div>");
-                pill.html(this.gradePills[a].name);
-                pill.attr("class", "input-pill ovalPill");
-                pill.data("value", this.gradePills[a].value);
-                pillsContainer.append(pill);
-              }
+      this.createStudentPill = function(appendIn){
+        // ATRIBUTES: none.
+        // F: Creates oval button with grade value.
+        var studPill = $("<div>");
+        studPill.html(this.name);
+        studPill.attr("class", "student-pill pill");
+        appendIn.append(studPill);
+      };
 
-            // $(".ovalPill").on("click", function(){
-            //   console.log("hello");
-            // })
-          };
+      this.createOvalPills = function(name, value, place, field){
+        // ATRIBUTES: name and value of the oval pill container.
+        // F: Creates oval button with grade value.
+        var ovalPill = $("<div>");
+        ovalPill.html(name);
+        ovalPill.attr("class", "input-pill ovalPill");
+        ovalPill.data("value", value);
+        place.append(ovalPill);
 
-        this.assignedGrade = "nr";
+        ovalPill.on("click", function(){
+          console.log("hello dude");
+          console.log($(this).data("value"));
+          field.val($(this).data("value"));
+        });
+      };
 
-    }
+      this.createImputText = function(place){
+        // ATRIBUTES: place- set the parent.
+        // F: Creates input text with empty value.
+        var inputText = $("<input>");
+        inputText.val('');
+        place.append(inputText);
+      };
+
+      this.createAllGradeControls = function(place){
+          //Create the control container and append it.
+          var controlContainer = $("<div>");
+          controlContainer.attr("class", "assignGrades");
+          place.append(controlContainer);
+
+          //create the imput variable with full features
+          var inputText = $("<input>");
+          inputText.val("");
+          controlContainer.append(inputText);
+          //create the oval pill with calling function
+          this.createOvalPills("50/F", 50, controlContainer, inputText);
+          this.createOvalPills("60/F", 60, controlContainer, inputText);
+          this.createOvalPills("70/F", 70, controlContainer, inputText);
+          this.createOvalPills("80/F", 80, controlContainer, inputText);
+          this.createOvalPills("90/F", 90, controlContainer, inputText);
+          this.createOvalPills("100/F", 100, controlContainer, inputText);
+      };
+
+      this.createGradeControls = function (appendIn){
+        // ATRIBUTES: appendOn.
+        // F: Creates the control container and append it.
+        //    create the invividual grade controls and handles and event for each
+        var controlContainer = $("<div>");
+        controlContainer.attr("class", "assignGrades");
+        appendIn.append(controlContainer);
+
+        this.createImputText(controlContainer);
+        this.createOvalPills("50/F", 50, controlContainer);
+        this.createOvalPills("60/F", 60, controlContainer);
+        this.createOvalPills("70/F", 70, controlContainer);
+        this.createOvalPills("80/F", 80, controlContainer);
+        this.createOvalPills("90/F", 90, controlContainer);
+        this.createOvalPills("100/F", 100, controlContainer);
+
+
+
+
+        // controlContainer.append(g60, g70, g80, g90, g100,inputGrade);
+        //add event handler here???????????????????????
+        // variables may not render try to add a return stament before calling the function or add and append parameter
+
+      };
+
+      this.createStudentRow = function(){
+        var studentRow = $("<div>");
+        studentRow.attr("class", "studentControl");
+        this.createStudentPill(studentRow);
+        this.createAllGradeControls(studentRow);
+        // this.createGradeControls(studentRow);
+        $("#evalTable").append(studentRow);
+
+      };
+
+
+    } // end of constructor
     // Here a new array is creating with the method map and the constructor
       var students = data.map(function (array){
 	     return new Student(array.name, array.id, array.grade, array.tier, array.team);
       });
 
-      // var activeTeam = "not assigned";
 
   // Sets the event handler for student pills for each html file
       switch ($("body").data("file")) {
@@ -299,7 +346,9 @@
           $("#evDate").val(date.toDateString());
             activeTeam = "empty"
           $("#evalTable").empty();
-          $("#pill").remove();
+          $(".studentControl").remove();
+          //student control is a variable. is the value is colled twice it keeps ths old children
+
       }
 
       // Parameters |-name of the group (pill) |-students data(ajax)
