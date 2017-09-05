@@ -194,15 +194,7 @@
         });
       };
 
-      this.createImputText = function(place){
-        // ATRIBUTES: place- set the parent.
-        // F: Creates input text with empty value.
-        var inputText = $("<input>");
-        inputText.val('');
-        place.append(inputText);
-      };
-
-      this.createAllGradeControls = function(place){
+      this.createGradeControls = function(place){
           //Create the control container and append it.
           var controlContainer = $("<div>");
           controlContainer.attr("class", "assignGrades");
@@ -221,36 +213,12 @@
           this.createOvalPills("100/F", 100, controlContainer, inputText);
       };
 
-      this.createGradeControls = function (appendIn){
-        // ATRIBUTES: appendOn.
-        // F: Creates the control container and append it.
-        //    create the invividual grade controls and handles and event for each
-        var controlContainer = $("<div>");
-        controlContainer.attr("class", "assignGrades");
-        appendIn.append(controlContainer);
-
-        this.createImputText(controlContainer);
-        this.createOvalPills("50/F", 50, controlContainer);
-        this.createOvalPills("60/F", 60, controlContainer);
-        this.createOvalPills("70/F", 70, controlContainer);
-        this.createOvalPills("80/F", 80, controlContainer);
-        this.createOvalPills("90/F", 90, controlContainer);
-        this.createOvalPills("100/F", 100, controlContainer);
-
-
-
-
-        // controlContainer.append(g60, g70, g80, g90, g100,inputGrade);
-        //add event handler here???????????????????????
-        // variables may not render try to add a return stament before calling the function or add and append parameter
-
-      };
 
       this.createStudentRow = function(){
         var studentRow = $("<div>");
         studentRow.attr("class", "studentControl");
         this.createStudentPill(studentRow);
-        this.createAllGradeControls(studentRow);
+        this.createGradeControls(studentRow);
         // this.createGradeControls(studentRow);
         $("#evalTable").append(studentRow);
 
