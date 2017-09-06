@@ -187,10 +187,15 @@
         ovalPill.data("value", value);
         place.append(ovalPill);
 
+        that = this.evalGrade;
+
         ovalPill.on("click", function(){
           console.log("hello dude");
           console.log($(this).data("value"));
           field.val($(this).data("value"));
+          that = 60;
+          console.log(that);
+
         });
       };
 
@@ -444,7 +449,26 @@
     });
 
   // == | C.3 | EVENT HANDLERS for Evaluation.html ==================================
-  $(".ovalPill").on("click", function(){
-    console.log("hello");
-  })
+
+    //START NEW EVALUATION BUTTON.
+          // Writes the evaluation name and date on the boxheader
+
+    $("#newEvaluationBtn").on("click", function(){
+      event.preventDefault();
+      $("#displayEvName").html($("#evName").val());
+      $("#displayEvDate").html("&nbsp" + $("#evDate").val());
+    });
+
+    $("#submitBtn").on("click", function(){
+      event.preventDefault();
+      console.log("hey");
+      for(i = 0; i < students.length; i++){
+        console.log(students[i].name + students[i].evalGrade);
+      }
+
+    })
+
+
+
+
 });  // End of document get ready
