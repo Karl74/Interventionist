@@ -145,6 +145,15 @@
       {name:"Pablito", id:7691, grade:"k", tier:2, team:"Fifth A"}
     	];
 
+ var evaluationGrades = [{name:"empty", grade:"empty"}];
+
+ var evaluationObject = {
+   evaluationName: "",
+   evaluationDate: "",
+   groupEvaluated:"",
+   evaluationGrades:[]
+ }
+
 // STUDENT OBJECT CONSTRUCTOR
     function Student(name, id, grade, tier, team){
     	this.name = name;
@@ -178,23 +187,43 @@
         appendIn.append(studPill);
       };
 
+      this.recordGrade = function(name, grade){
+        var recorded = true;
+
+        for(i = 0; i < evaluationGrades.length; i++){
+          if(evaluationGrades[i].name === name){
+            console.log("already recorded");
+            evaluationGrades.splice(i,1,{name:name, grade:grade});
+            recorded = true;
+            break;
+          } else {
+            recorded = false;
+            console.log("is not recorded");
+          }
+        }
+        if(recorded === false){
+          evaluationGrades.push({name:name, grade:grade});
+        }
+      }
+
       this.createOvalPills = function(name, value, place, field){
-        // ATRIBUTES: name and value of the oval pill container.
+        // PARAMETERS: name and value of the oval pill container.
+        // IMPORTANT: PARAMETER "name" is the label to be written in the pill. It is not the student name
         // F: Creates oval button with grade value.
         var ovalPill = $("<div>");
         ovalPill.html(name);
         ovalPill.attr("class", "input-pill ovalPill");
         ovalPill.data("value", value);
         place.append(ovalPill);
+        var that = this.name;
+        var thefunction = this.recordGrade;
+        // var thisStudentRecord = this.studentRecord;
 
-        that = this.evalGrade;
-
-        ovalPill.on("click", function(){
-          console.log("hello dude");
+          ovalPill.on("click", function(){
           console.log($(this).data("value"));
           field.val($(this).data("value"));
-          that = 60;
-          console.log(that);
+          thefunction(that, $(this).data("value"));
+          console.log(evaluationGrades);
 
         });
       };
@@ -313,10 +342,12 @@
     // Parameters $(this) --> the clicked pill.
       // Displays the team name at the evaluation title.
       // Displays the current date at the input box.()
+      var date = new Date();
+
       function setTeamToEvaluate(pill){
           $("#teamName").html(teams[pill.data("index")].name);
-          var date = new Date();
           $("#evDate").val(date.toDateString());
+          evaluationObject.evaluationDate = date;
             activeTeam = "empty"
           $("#evalTable").empty();
           $(".studentControl").remove();
@@ -330,11 +361,10 @@
         $("#evalTable").empty();
         activeTeam = teams[pill.data("index")].name;
         console.log("this is the active team" + activeTeam);
+        evaluationObject.groupEvaluated = activeTeam;
 
         for (i = 0; i < students.length; i++){
           if(students[i].team == activeTeam){
-            console.log(students[i].name + " is here");
-            console.log(students[i]);
             students[i].createStudentRow();
           }
         }
@@ -436,6 +466,7 @@
           case "evaluations":
           setTeamToEvaluate($(this));
           callGroupStudents($(this));
+          evaluationGrades = [{name:"empty", grade:"empty"}];
           //create the students pills and controls
           // create the evalution object
         }
@@ -456,19 +487,20 @@
     $("#newEvaluationBtn").on("click", function(){
       event.preventDefault();
       $("#displayEvName").html($("#evName").val());
+      evaluationObject.evaluationName = $("#evName").val();
       $("#displayEvDate").html("&nbsp" + $("#evDate").val());
     });
+
+    //SUBMIT EVALUATION BUTTON.
+        // Populates the evalutation object and post it to the back end
 
     $("#submitBtn").on("click", function(){
       event.preventDefault();
       console.log("hey");
-      for(i = 0; i < students.length; i++){
-        console.log(students[i].name + students[i].evalGrade);
-      }
-
+      evaluationGrades.shift();
+      evaluationObject.evaluationGrades = evaluationGrades;
+      console.log(evaluationObject);
     })
-
-
 
 
 });  // End of document get ready

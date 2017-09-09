@@ -30,3 +30,36 @@
 // handler event for change button
 
 // }
+
+
+var myarray = [
+  {name:"carlos", grade: 100},
+  {name: "eneida", grade:80}
+  ]
+
+var nuevo = "jose" ;
+
+function installGrade (){
+var alreadyThere = true;
+
+  for (i=0; i<myarray.length; i++){
+    if (myarray[i].name == nuevo){
+      console.log("ya esta!!!");
+      myarray.splice(i,1)
+      myarray.push({name:nuevo, grade:100})
+      alreadyThere = true;
+      break;
+    } else {
+      alreadyThere = false;
+      console.log("cuantas veces lo vez?")
+    }
+  }
+   console.log(alreadyThere);
+   if (alreadyThere === false){
+     myarray.push({name:nuevo, grade:100})
+   }
+}
+  installGrade();
+
+
+  console.log(myarray);
