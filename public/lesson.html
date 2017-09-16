@@ -24,7 +24,7 @@
       <div class="">
         <h4 class=>Select a group</h4>
       </div>
-      <div class="pill-display">
+      <div class="pill-display group-display">
         <!-- The groups pills are dynamic displayed here -->
         <div class="find-pill pill">
           Type Name
@@ -75,51 +75,42 @@
       <h4 class="section-subtitle-data" id="displayLessonDate"> &nbsp;Sept 25th</h4>
     </div>
 
-    <table class="table">
-      <tr>
-        <th>Students</th>
-        <th>Counter - / +</th>
-        <th>Session Performance</th>
-        <th>Notes</th>
-      </tr>
-      <tr>
-        <td>
-          <div class="student-pill pill">Student1</div>
-        </td>
-        <td>
-          <div id="counter">
-            <div class="input-pill pill">-</div>
-            <div class="input-pill pill">+</div>
-            <div class="counts-box">
-              <div class="count-display" id="positiveCount">
-                - 3
-              </div>
-              <div class="">
-                /
-              </div>
-              <div class="count-display" id="negativeCount">
-                + 8
-              </div>
+    <div class="controls-titles">
+        <h5>Students</h5>
+        <h5>Counter - / +</h5>
+        <h5>Session Performance</h5>
+    </div>
 
+    <div id="evalTable">
+      <div class="allRecordTools">
+        <div class="studentControl">
+            <div class="student-pill pill">Student1</div>
+
+            <div class="counter">
+              <div class="count-display" id="positiveCount">- 3 </div>
+              <div class="input-pill ovalPill">-</div>
+              <div class=""> / </div>
+              <div class="input-pill ovalPill">+</div>
+              <div class="count-display" id="negativeCount">+ 8 </div>
             </div>
-          </div>
-        </td>
-        <td>
-          <div id="performance">
-            <div class="input-pill pill">Under</div>
-            <div class="input-pill pill">Meets</div>
-            <div class="input-pill pill">Exceeds</div>
-          </div>
-        </td>
-        <td>
-          <label for="">Notes</label>
-          <input type="text" name="" value="">
-        </td>
-      </tr>
-    </table>
+
+            <div id="performance">
+              <input type="text" class="showInput" value="">
+              <div class="input-pill ovalPill">Under</div>
+              <div class="input-pill ovalPill">Meets</div>
+              <div class="input-pill ovalPill">Exceeds</div>
+            </div>
+
+            <button type="button" class="btn btn-primary">Notes</button>
+        </div>
+        <div class="notesBox">
+          <textarea rows="2" cols="95"></textarea>
+        </div>
+      </div>
   </div>
-<button class="btn btn-default pull-right" type="button" name="button">Submit Lesson Results</button>
-  </div>
+</div>
+  <button class="btn btn-default pull-right" type="button" name="button">Submit Lesson Results</button>
+</div>
   <!-- End of container -->
 
   <div class="modal fade" tabindex="-1" role="dialog">

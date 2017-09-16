@@ -253,11 +253,88 @@
         studentRow.attr("class", "studentControl");
         this.createStudentPill(studentRow);
         this.createGradeControls(studentRow);
-        // this.createGradeControls(studentRow);
+
         $("#evalTable").append(studentRow);
 
       };
 
+      this.createLessonTools = function(){
+        // Creates the div for display the individual student createLessonControls
+        // and call the fucntions to render the controls
+        var allRecordTools = $("<div>");
+        allRecordTools.attr("class", "allRecordTools");
+        this.createStudentControl(allRecordTools);
+        this.createNoteBox(allRecordTools);
+
+        $("#evalTable").append(allRecordTools);
+      };
+
+      this.createStudentControl= function(appenIn){
+        var studentControl = $("<div>");
+        studentControl.attr("class", "studentControl");
+        this.createStudentPill(studentControl);
+        this.createLessonControls(studentControl);
+        appenIn.append(studentControl);
+      };
+
+      this.createLessonControls= function(appenIn){
+        var counter = $("<div>");
+        counter.attr("class", "counter");
+        this.createCounter(counter);
+        this.createPerformaceBox(counter);
+
+        appenIn.append(counter);
+
+      };
+
+      this.createCounter = function(appenIn){
+        var countDisplay = $("<input>");
+        countDisplay.attr("class", "counter");
+
+        var positiveCount = $("<div>");
+        positiveCount.attr("class", "input-pill ovalPill positive");
+        positiveCount.html("+")
+
+        var negativeCount = $("<div>");
+        negativeCount.attr("class", "input-pill ovalPill negative");
+        negativeCount.html("-")
+
+        appenIn.append(positiveCount);
+        appenIn.append(negativeCount);
+        appenIn.append(countDisplay);
+      };
+
+      this.createPerformaceBox = function(appenIn){
+        var performanceDisplay = $("<div>");
+        performanceDisplay.attr("class", "countDisplay");
+        this.performanceControls(performanceDisplay);
+        appenIn.append(performanceDisplay);
+      };
+
+      this.performanceControls = function(appenIn){
+        var inputPerformance = $("<input>")
+        inputPerformance.attr("class", "counter");
+        var under = $("<div>");
+        var meets = $("<div>");
+        var exceeds = $("<div>");
+
+        under.html("under");
+        under.attr("class", "input-pill ovalPill");
+        meets.html("meets");
+        meets.attr("class", "input-pill ovalPill");
+        exceeds.html("exceeds");
+        exceeds.attr("class", "input-pill ovalPill");
+
+        appenIn.append([under, meets, exceeds, inputPerformance]);
+
+        console.log(under.html());
+
+
+      };
+
+      this.createNoteBox= function(appenIn){
+          console.log("waiting");
+      };
 
     } // end of constructor
     // Here a new array is creating with the method map and the constructor
@@ -370,6 +447,21 @@
         }
       }
 
+//iniciates the lessons.html module
+      function callLessonStudents(pill){
+        $("#evalTable").empty();
+        activeTeam = teams[pill.data("index")].name;
+        console.log("this is the active team" + activeTeam);
+        evaluationObject.groupEvaluated = activeTeam;
+
+        for (i = 0; i < students.length; i++){
+          if(students[i].team == activeTeam){
+            students[i].createLessonTools();
+          }
+        }
+      }
+
+
 // == | C | EVENT HANDLERS  ==================================
   // == | C.1 | EVENT HANDLERS for Student.html ==================================
 
@@ -467,8 +559,11 @@
           setTeamToEvaluate($(this));
           callGroupStudents($(this));
           evaluationGrades = [{name:"empty", grade:"empty"}];
-          //create the students pills and controls
-          // create the evalution object
+          break;
+
+          case "lesson":
+          setTeamToEvaluate($(this));
+          callLessonStudents($(this));
         }
       })
 

@@ -218,7 +218,7 @@ button {
 }
 
 /* ======== lessons html only=========================== */
-#counter{
+.counter{
   display: flex;
   justify-content:flex-start;
   align-items: center;
@@ -237,6 +237,7 @@ button {
   text-align: center;
   margin-left: 4px;
   margin-right: 4px;
+  width: 40px;
 }
 
 #performance{
@@ -249,6 +250,17 @@ button {
   justify-content:flex-start;
 }
 
+.createAndEdit, .createNewGroup {
+  display: none;
+}
+
+.allRecordTools {
+  text-align: center;
+}
+
+textarea{
+  margin: 3px;
+}
 /*== EXPANDED PANNELS ===================================*/
 .childExpanded{
   height: 59px;
@@ -297,8 +309,8 @@ outline: 0;
   display: flex;
   justify-content: space-evenly;
 }
- #try{
-   width: 30px;
+ .showInput{
+   width: 60px;
  }
 /*== MODALS ===================================*/
 .modal-screen{
@@ -322,9 +334,4 @@ outline: 0;
   display: flex;
   align-items: flex-start;
   justify-content: flex-end;
-}
-
-/* ======== lessons html only=========================== */
-.createAndEdit, .createNewGroup {
-  display: none;
 }
