@@ -525,6 +525,8 @@
         }
       }
 
+// ===== | B.3 | Lesson.html DATA FUNCTIONS ============================
+
 //iniciates the lessons.html module
       function callLessonStudents(pill){
         $("#evalTable").empty();
@@ -538,6 +540,38 @@
           }
         }
       }
+
+//this create the skill pill. ??? can you usend on skill html????
+      function skillPillforLesson (label, appendIn){
+        var skillPill = $("<div>");
+        skillPill.attr("class", " pill skill-pill");
+        skillPill.html(label)
+        appendIn.append(skillPill);
+
+      }
+
+      var skills = [
+          {skill:"Central Idea"},
+          {skill:"Cause and Effect"},
+          {skill:" Recall facts and details"},
+          {skill:"Comparing and contrasting"},
+          {skill:"Sequence"},
+          {skill:"inferencing"},
+          {skill:"Word meaning in context"},
+          {skill:"Author's Purpose"},
+          {skill:"Figurative Language"},
+          {skill: "Summarizing"},
+          {skill: "Fact and opinions"}
+        ];
+
+// loop too display the teacher's skills in the lessonSkillBox
+
+  for(s = 0; s < skills.length; s++){
+    skillPillforLesson(skills[s].skill, $(".lessonSkillBox"));
+
+  }
+
+
 
 
 // == | C | EVENT HANDLERS  ==================================
