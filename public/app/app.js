@@ -154,6 +154,15 @@
    evaluationGrades:[]
  }
 
+ var lessonRecordedPerformace = [{name:"empty", performance:"empty"}];
+ var lessonObject = {
+   lessonSkill: "",
+   lessonDate: "",
+   lessonGroup: "",
+   lessonGrades:[],
+   lessonNotes:[],
+ }
+
 // STUDENT OBJECT CONSTRUCTOR
     function Student(name, id, grade, tier, team){
     	this.name = name;
@@ -167,6 +176,8 @@
       // this.studPill = $("<div>");
       this.gradeToDisplay = "";
       this.assignedGrade = "nr";
+      this.tallyCounter = 0;
+      this.lessonPerformance ="nr";
 
       this.addCounter = function(){
         //ATRIBUTES: none.
@@ -264,7 +275,7 @@
         var allRecordTools = $("<div>");
         allRecordTools.attr("class", "allRecordTools");
         this.createStudentControl(allRecordTools);
-        this.createNoteBox(allRecordTools);
+        this.createBoxContainer(allRecordTools);
 
         $("#evalTable").append(allRecordTools);
       };
@@ -282,6 +293,7 @@
         counter.attr("class", "counter");
         this.createCounter(counter);
         this.createPerformaceBox(counter);
+        this.createButtonNoteButton(counter);
 
         appenIn.append(counter);
 
@@ -289,7 +301,7 @@
 
       this.createCounter = function(appenIn){
         var countDisplay = $("<input>");
-        countDisplay.attr("class", "counter");
+        countDisplay.attr("class", "count-display");
 
         var positiveCount = $("<div>");
         positiveCount.attr("class", "input-pill ovalPill positive");
@@ -302,38 +314,104 @@
         appenIn.append(positiveCount);
         appenIn.append(negativeCount);
         appenIn.append(countDisplay);
+
+        tallyCounter = this.tallyCounter;
+        positiveCount.on("click", function(){
+          tallyCounter += 1;
+          countDisplay.val(tallyCounter);
+        });
+
+        negativeCount.on("click", function(){
+          tallyCounter -= 1;
+          countDisplay.val(tallyCounter);
+        })
+
+
+
       };
 
       this.createPerformaceBox = function(appenIn){
         var performanceDisplay = $("<div>");
-        performanceDisplay.attr("class", "countDisplay");
+        performanceDisplay.attr("class", "counter");
         this.performanceControls(performanceDisplay);
         appenIn.append(performanceDisplay);
       };
 
+      this.createPerformancePill = function(label, appenIn, field){
+        var performancePill = $("<div>");
+        performancePill.html(label);
+        performancePill.attr("class", "input-pill ovalPill");
+        appenIn.append(performancePill);
+
+        var thisName = this.name;
+        var recordFunction = this.recordPerformance;
+
+        $(performancePill).on("click", function(){
+          console.log(label);
+          field.val(label);
+          recordFunction(thisName, label);
+          console.log(lessonRecordedPerformace);
+        });
+
+      }
+
       this.performanceControls = function(appenIn){
         var inputPerformance = $("<input>")
-        inputPerformance.attr("class", "counter");
-        var under = $("<div>");
-        var meets = $("<div>");
-        var exceeds = $("<div>");
-
-        under.html("under");
-        under.attr("class", "input-pill ovalPill");
-        meets.html("meets");
-        meets.attr("class", "input-pill ovalPill");
-        exceeds.html("exceeds");
-        exceeds.attr("class", "input-pill ovalPill");
-
-        appenIn.append([under, meets, exceeds, inputPerformance]);
-
-        console.log(under.html());
-
+        inputPerformance.attr("class", "performace-display");
+        
+        this.createPerformancePill("under", appenIn, inputPerformance);
+        this.createPerformancePill("meets", appenIn, inputPerformance);
+        this.createPerformancePill("above", appenIn, inputPerformance);
+        
+        appenIn.append(inputPerformance);
 
       };
 
-      this.createNoteBox= function(appenIn){
-          console.log("waiting");
+
+      this.createButtonNoteButton = function(appenIn){
+        var noteButton = $("<button>");
+        noteButton.attr("class", "btn btn-primary");
+        noteButton.html("Notes");
+
+        appenIn.append(noteButton);
+      }
+
+      this.createBoxContainer = function(appenIn){
+        var noteDiv = $("<div>");
+        noteDiv.attr("class", "noteHidden");
+        this.createNoteBox(noteDiv);
+
+        appenIn.append(noteDiv);
+      };
+
+      this.createNoteBox = function(appenIn){
+          var noteBox = $("<textarea>");
+          noteBox.attr({rows: "2", cols: "83"});
+
+          var closeNote = $("<button>");
+          closeNote.attr("class", "btn btn-primary");
+          closeNote.html("Close");
+
+          appenIn.append([noteBox, closeNote]);
+      };
+
+      this.recordPerformance = function(name, performance){
+        var recorded = true;
+
+        for(i = 0; i < lessonRecordedPerformace.length; i++){
+          if(lessonRecordedPerformace[i].name === name){
+            console.log("already recorded");
+            lessonRecordedPerformace.splice(i,1,{name: name, performance: performance});
+            recorded = true;
+            break;
+          } else {
+            recorded = false;
+            console.log("is not recorded");
+          }
+        }
+        if(recorded === false){
+          lessonRecordedPerformace.push({name:name, performace: performance});
+        }
       };
 
     } // end of constructor
