@@ -327,7 +327,6 @@
         })
 
 
-
       };
 
       this.createPerformaceBox = function(appenIn){
@@ -374,6 +373,8 @@
         noteButton.html("Notes");
 
         appenIn.append(noteButton);
+
+
       }
 
       this.createBoxContainer = function(appenIn){
@@ -502,7 +503,10 @@
       function setTeamToEvaluate(pill){
           $("#teamName").html(teams[pill.data("index")].name);
           $("#evDate").val(date.toDateString());
+          $("#displayLessonDate").html(date.toDateString());
+          console.log("i am working here");
           evaluationObject.evaluationDate = date;
+          lessonObject.lessonDate = date;
             activeTeam = "empty"
           $("#evalTable").empty();
           $(".studentControl").remove();
@@ -532,7 +536,7 @@
         $("#evalTable").empty();
         activeTeam = teams[pill.data("index")].name;
         console.log("this is the active team" + activeTeam);
-        evaluationObject.groupEvaluated = activeTeam;
+        lessonObject.lessonGroup = activeTeam;
 
         for (i = 0; i < students.length; i++){
           if(students[i].team == activeTeam){
@@ -570,8 +574,6 @@
     skillPillforLesson(skills[s].skill, $(".lessonSkillBox"));
 
   }
-
-
 
 
 // == | C | EVENT HANDLERS  ==================================
@@ -709,5 +711,21 @@
       console.log(evaluationObject);
     })
 
+  // == | C.4 | EVENT HANDLERS for Lesson.html ==================================
+
+    $(".skill-pill").on("click", function(){
+      console.log($(this).html());
+      $("#displayLessonSkill").html($(this).html());
+      lessonObject.lessonSkill = $(this).html();
+      console.log(lessonObject);
+    });
+
+
+    $("#submitLesson").on("click", function(){
+      event.preventDefault();
+      lessonRecordedPerformace.shift();
+      lessonObject.lessonGrades = lessonRecordedPerformace;
+      console.log(lessonObject);
+    })
 
 });  // End of document get ready
