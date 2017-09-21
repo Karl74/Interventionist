@@ -1,0 +1,26 @@
+{
+  "name": "interventionist",
+  "version": "1.0.1",
+  "description": "app to track student progress ",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Karl74/Interventionist.git"
+  },
+  "author": "Karl74",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Karl74/Interventionist/issues"
+  },
+  "homepage": "https://github.com/Karl74/Interventionist#readme",
+  "dependencies": {
+    "body-parser": "^1.18.1",
+    "bluebird": "^3.5.0",
+    "express": "^4.15.3",
+    "mongoose": "^4.11.1"
+  }
+}

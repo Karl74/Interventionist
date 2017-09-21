@@ -2,6 +2,13 @@ body{
   background-color: #eeeeff;
   width: 784px;
   margin: auto;
+  padding-top: 50px;
+}
+
+@media (max-width: 784px) {
+  body {
+    padding-top: 0px;
+  }
 }
 
 .window-title{
