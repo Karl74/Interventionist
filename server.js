@@ -16,7 +16,7 @@ app.use(express.static(__dirname + "/public"));
 
 app.use("/", routes);
 
-var db = process.env.MONGODB_URI || "mongodb://localhost/myvisitors";
+var db = process.env.MONGODB_URI || "mongodb://localhost/interventionDb";
 
 mongoose.connect(db, function(error) {
   // Log any errors connecting with mongoose

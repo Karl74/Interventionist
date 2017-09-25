@@ -1,65 +1,8 @@
-//End of document get ready
-// var studentApp = {
 
-// function to display the "Edit form section"
-// function to close the "Edit Student section"
-// Event handler for student pill
-
-// function that form the new student object
-// function that post the new student object
-// Event handler for New student
-
-// function to get all the students in the database
-// function to create a single student pill
-// function to render a student pill for each student in the database
-
-//funtion to display a find student modal
-// function to get the find a student object from the modal
-// function to send the request object the query object from modal
-// Event handler for type pill
-// function to close the modal
-//function to display the response object inside the edit student form-box
-
-// handler event for the student pill
-// function to request the data of the student name
-//function to display the response object inside the edit student form-box (duplicated)
-
-// function to create the edit object to request (post)
-// function to post the edit student info
-// function to inform the user that the student info was updated
-// handler event for change button
-
-// }
+update({_id:"77001"},{$set:{groups:[{groupName:"5th Jones"}]}})
 
 
-var myarray = [
-  {name:"carlos", grade: 100},
-  {name: "eneida", grade:80}
-  ]
-
-var nuevo = "jose" ;
-
-function installGrade (){
-var alreadyThere = true;
-
-  for (i=0; i<myarray.length; i++){
-    if (myarray[i].name == nuevo){
-      console.log("ya esta!!!");
-      myarray.splice(i,1)
-      myarray.push({name:nuevo, grade:100})
-      alreadyThere = true;
-      break;
-    } else {
-      alreadyThere = false;
-      console.log("cuantas veces lo vez?")
-    }
-  }
-   console.log(alreadyThere);
-   if (alreadyThere === false){
-     myarray.push({name:nuevo, grade:100})
-   }
-}
-  installGrade();
+update({_id:"77001"},{$set:{lessons:[{lessonDate:"09/23/17", lessonGrade:"80", lessonSkill:"Central Idea"}]}})
 
 
-  console.log(myarray);
+db.getCollection('students').find({}).sort({name:1})
