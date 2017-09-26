@@ -5,9 +5,12 @@ var orms = require("../controllers/orms");
 var router = new express.Router();
 
 // | C | CREATE QUERIES ==========================================
+//students.html ADD A STUDENT
+  router.post("/lesson/newstudent", orms.addStudent);
 
 // | R | READ QUERIES =============================================
-
+  //get all the students in the collection
+  router.get("/app/allthestudents", orms.showAllStudents);
 // | U | UDATE QUERIES =============================================
 
 // | D | DELETE QUERIES =============================================

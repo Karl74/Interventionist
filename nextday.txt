@@ -1,0 +1,10 @@
+write create a student orm
+write create a student url
+
+write find all the students orms
+write find all the students url
+
+write the ajax post for create a student
+
+write the ajax call for find all the students
+connect the existing with the ajax call result

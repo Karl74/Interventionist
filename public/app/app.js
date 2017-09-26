@@ -24,7 +24,7 @@
       bar.parent().next().css("display", "block");
       bar.children().attr("class", "glyphicon glyphicon-minus");
     }
-  // Parameters. html element to cpmtracts. Contracts a child ---------------------------------------------
+  // Parameters. html element to conttracts. Contracts a child ---------------------------------------------
     function contractChild(bar) {
       bar.data("status", "contracted");
       bar.attr("class", "window-title expander");
@@ -50,13 +50,16 @@
     // create the new student object and the ajax call
       function addNewStudent(){
         var newStudent = {
+          _id: $("#stuNameNew").val(),
           stuName: $("#stuIdNew").val(),
-          stuId: $("#stuNameNew").val(),
-          stuGrade: $("#stuGradeNew").val(),
+          stuGradeLevel: $("#stuGradeNew").val(),
           stuTier: $("#stuTierNew").val(),
-          stuTeam: $("#stuTeamNew").val()
+          // stuTeam: $("#stuTeamNew").val()
         }
         console.log(newStudent);
+        $.post("/api/lesson/newstudent", newStudent, function(data){
+          console.log(data);
+        })
       }
 
     // create the edit student object and the ajax call
@@ -357,11 +360,11 @@
       this.performanceControls = function(appenIn){
         var inputPerformance = $("<input>")
         inputPerformance.attr("class", "performace-display");
-        
+
         this.createPerformancePill("under", appenIn, inputPerformance);
         this.createPerformancePill("meets", appenIn, inputPerformance);
         this.createPerformancePill("above", appenIn, inputPerformance);
-        
+
         appenIn.append(inputPerformance);
 
       };
@@ -423,22 +426,19 @@
 
 
   // Sets the event handler for student pills for each html file
-      switch ($("body").data("file")) {
-        case "student":
-              console.log("this is the student file");
-              for(i = 0; i < students.length; i++){
-                studentPill(students[i].name, $(".stu-dis"), i);
-              }
-          break;
-        case "teams":
-            console.log("this is the team file");
-            // for(i = 0; i < students.length; i++){
-            //   if(students[i].team !== activeTeam){
-            //     studentPill(students[i].name, $(".stu-dis"), i);
-            //   }
-            // }
-          break;
-      }
+
+  function getAllStudents(data){
+      console.log("this is the student file");
+      for(i = 0; i < data.length; i++){
+        studentPill(data[i].stuName, $(".stu-dis"), i);
+          }
+  }
+
+  $.get("/api/app/allthestudents", function(data){
+    console.log(data);
+    getAllStudents(data);
+  });
+
 
 // ===== | B.1 | TEAMS DATA FUNCTIONS =====================================
     // inlue of ajax call

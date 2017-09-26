@@ -2,15 +2,15 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var studentSchema = new Schema({
-  teacher:{type: Schema.Types.ObjectId, ref: "Teacher"},
+  // teacherId:{type: Schema.Types.ObjectId, ref: "Teacher"},
 
   _id:{type:String, required:true, unique: true},
 
-  studentName: {type: String, required: true},
+  stuName: {type: String, required: true},
 
-  gradeLevel:{type: String, required: true},
+  stuGradeLevel:{type: String, required: true},
 
-  tier:{type: Number}
+  stuTier:{type: Number}
 });
 
 var Student = mongoose.model("Student", studentSchema);
