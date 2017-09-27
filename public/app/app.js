@@ -50,8 +50,8 @@
     // create the new student object and the ajax call
       function addNewStudent(){
         var newStudent = {
-          _id: $("#stuNameNew").val(),
-          stuName: $("#stuIdNew").val(),
+          _id: $("#stuIdNew").val(),
+          stuName: $("#stuNameNew").val(),
           stuGradeLevel: $("#stuGradeNew").val(),
           stuTier: $("#stuTierNew").val(),
           // stuTeam: $("#stuTeamNew").val()
@@ -65,8 +65,8 @@
     // create the edit student object and the ajax call
         function updateStudent(){
           var editStudent = {
-            stuName: $("#stuIdEdit").val(),
-            stuId: $("#stuNameEdit").val(),
+            stuName: $("#stuNameEdit").val(),
+            stuId: $("#stuIdEdit").val(),
             stuGrade: $("#stuGradeEdit").val(),
             stuTier: $("#stuTierEdit").val(),
             stuTeam: $("#stuTeamEdit").val()
@@ -137,15 +137,15 @@
   // Set the student object and display =======================
   // Inlue of ajax call
     var data = [
-    	{name:"Marcela", id:7701, grade:5, tier:2, team:"Fifth B"},
-    	{name:"Mariana", id:7904, grade:7, tier:2, team:"Fifth B"},
-    	{name:"Claribel", id:7101, grade:3, tier:2, team:"Fourth A"},
-      {name:"Carlitos", id:7201, grade:1, tier:2, team:"Fifth B"},
-      {name:"Sonic", id:7301, grade:"k", tier:2, team:"Fourth A"},
-      {name:"Pepe", id:7401, grade:"k", tier:2, team:"Fourth A"},
-      {name:"Toño", id:7501, grade:"k", tier:2, team:"Fourth A"},
-      {name:"Concha", id:7601, grade:"k", tier:2, team:"Fourth B"},
-      {name:"Pablito", id:7691, grade:"k", tier:2, team:"Fifth A"}
+    	// {name:"Marcela", id:7701, grade:5, tier:2, team:"Fifth B"},
+    	// {name:"Mariana", id:7904, grade:7, tier:2, team:"Fifth B"},
+    	// {name:"Claribel", id:7101, grade:3, tier:2, team:"Fourth A"},
+      // {name:"Carlitos", id:7201, grade:1, tier:2, team:"Fifth B"},
+      // {name:"Sonic", id:7301, grade:"k", tier:2, team:"Fourth A"},
+      // {name:"Pepe", id:7401, grade:"k", tier:2, team:"Fourth A"},
+      // {name:"Toño", id:7501, grade:"k", tier:2, team:"Fourth A"},
+      // {name:"Concha", id:7601, grade:"k", tier:2, team:"Fourth B"},
+      // {name:"Pablito", id:7691, grade:"k", tier:2, team:"Fifth A"}
     	];
 
  var evaluationGrades = [{name:"empty", grade:"empty"}];
@@ -440,6 +440,19 @@
   });
 
 
+//   function getAllStudents(){
+//       $.get("/api/app/allthestudents", function(data){
+//         console.log(data);
+//       for(i = 0; i < data.length; i++){
+//         studentPill(data[i].stuName, $(".stu-dis"), i);
+//           }
+//       });
+//   }
+//
+// getAllStudents()
+
+
+
 // ===== | B.1 | TEAMS DATA FUNCTIONS =====================================
     // inlue of ajax call
     var teams = [
@@ -594,6 +607,8 @@
       $(".form-control").val("");
       alert("the new student was saved")
     });
+
+
     $("#editStudentButton").on("click", function(){
       event.preventDefault();
       updateStudent();
@@ -625,6 +640,7 @@
       // STUDENT-PILL FUNCTION(on teams.html). pending
       // STUDENT-PILL FUNCTION(on lesson.html). pending
       $(".student-pill").on("click", function(){
+        console.log("hello");
         if($("body").data("file") == "student"){
           $("#editStudent").css("display", "block");
           fillEditBox($(this).data("index"));
