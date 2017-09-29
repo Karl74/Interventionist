@@ -12,7 +12,8 @@ var router = new express.Router();
   //get all the students in the collection
   router.get("/app/allthestudents", orms.showAllStudents);
 // | U | UDATE QUERIES =============================================
-
+  // Update the student info from student.html
+  router.post("/lesson/updatestudent", orms.editAStudent);
 // | D | DELETE QUERIES =============================================
 
 // | N | NAVIGATION  +++++==========================================

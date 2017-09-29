@@ -6,6 +6,8 @@ module.exports = {
   addStudent: function(req, res){
     console.log("test");
     console.log(req.body);
+    console.log("+++++++++++++");
+    console.log(req.body._id);
     Student.create(req.body).then(function(doc){
       res.json(doc)}).catch(function(err){
         res.json(err);
@@ -21,6 +23,18 @@ module.exports = {
           res.send(students);
         }
     });
+  },
+
+  editAStudent: function(req, res){
+    console.log("test");
+
+    Student.findOneAndUpdate({_id: req.body._id},
+       {stuName: req.body.stuName,
+        stuGradeLevel: req.body.stuGradeLevel,
+        stuTier: req.body.stuTier}).then(function(doc){
+          res.json(doc)}).catch(function(err){
+            res.json(err);
+          })
   }
 
 }// end of moduleExports
