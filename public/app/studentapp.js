@@ -1,6 +1,6 @@
-//  == STUDENTS.html
+
 // !=======================================================================!
-// !              FUNCTIONS for visual effects and transitions             !
+// !                    FUNCTIONS FOR STUDENT.HTML                         !
 // !==++===================================================================!
 
 // ==|f1|== MAKE A CARD VISIBLE UNDER A BAR BUTTON (blue bar with + sign)
@@ -73,6 +73,7 @@
     //variables :
 
   function getStudentsFromDb(){
+    $(".stu-dis").empty();
     $.get("/api/app/allthestudents", function(data){
       console.log(data);
       for(i = 0; i < data.length; i++){
@@ -143,6 +144,7 @@
     $("#editStudentButton").on("click", function(){
       event.preventDefault();
       updateStudent();
+      getStudentsFromDb();
     });
 
 
