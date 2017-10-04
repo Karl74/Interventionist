@@ -35,7 +35,18 @@ module.exports = {
         stuTier: req.body.stuTier}).then(function(doc){
           res.json(doc)}).catch(function(err){
             res.json(err);
-          })
+          });
+  },
+
+  addGroup: function(req, res){
+    console.log("test");
+    console.log(req.body);
+    console.log("+++++++++++++");
+    console.log(req.body._id);
+    Group.create(req.body).then(function(doc){
+      res.json(doc)}).catch(function(err){
+        res.json(err);
+      });
   }
 
 }// end of moduleExports

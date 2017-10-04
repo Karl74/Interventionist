@@ -8,6 +8,10 @@ var router = new express.Router();
 //students.html ADD A STUDENT
   router.post("/lesson/newstudent", orms.addStudent);
 
+//students.html ADD A STUDENT
+  router.post("/groups/newgroup", orms.addGroup);
+
+
 // | R | READ QUERIES =============================================
   //get all the students in the collection
   router.get("/app/allthestudents", orms.showAllStudents);
