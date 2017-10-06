@@ -41,12 +41,19 @@ module.exports = {
   addGroup: function(req, res){
     console.log("test");
     console.log(req.body);
-    console.log("+++++++++++++");
-    console.log(req.body._id);
     Group.create(req.body).then(function(doc){
       res.json(doc)}).catch(function(err){
         res.json(err);
       });
+  },
+
+  updateStudentTeam: function(req, res){
+    console.log(req.body);
+    Student.findOneAndUpdate({_id: req.body._id},
+        {stuGroups: req.body.stuGroups}).then(function(doc){
+          res.json(doc)}).catch(function(err){
+            res.json(err);
+          });
   }
 
 }// end of moduleExports

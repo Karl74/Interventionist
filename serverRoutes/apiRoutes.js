@@ -18,6 +18,8 @@ var router = new express.Router();
 // | U | UDATE QUERIES =============================================
   // Update the student info from student.html
   router.post("/lesson/updatestudent", orms.editAStudent);
+  //update the student group from group.html
+  router.post("/group/updatestudent",orms.updateStudentTeam);
 // | D | DELETE QUERIES =============================================
 
 // | N | NAVIGATION  +++++==========================================

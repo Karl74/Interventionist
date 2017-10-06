@@ -10,7 +10,9 @@ var studentSchema = new Schema({
 
   stuGradeLevel:{type: String, required: true},
 
-  stuTier:{type: Number}
+  stuTier:{type: Number},
+
+  stuGroups: [{type:Schema.Types.ObjectId, ref: "Group"}]
 });
 
 var Student = mongoose.model("Student", studentSchema);
