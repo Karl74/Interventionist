@@ -13,13 +13,21 @@ var router = new express.Router();
 
 
 // | R | READ QUERIES =============================================
+
   //get all the students in the collection
-  router.get("/app/allthestudents", orms.showAllStudents);
+    router.get("/app/allthestudents", orms.showAllStudents);
+
+  // get all the groups in the collection
+    router.get("/app/allGroups", orms.showAllGroups);
+  
 // | U | UDATE QUERIES =============================================
+
   // Update the student info from student.html
-  router.post("/lesson/updatestudent", orms.editAStudent);
+    router.post("/lesson/updatestudent", orms.editAStudent);
+
   //update the student group from group.html
-  router.post("/group/updatestudent",orms.updateStudentTeam);
+    router.post("/group/updatestudent",orms.updateStudentTeam);
+
 // | D | DELETE QUERIES =============================================
 
 // | N | NAVIGATION  +++++==========================================

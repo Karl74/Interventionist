@@ -54,6 +54,16 @@ module.exports = {
           res.json(doc)}).catch(function(err){
             res.json(err);
           });
+  },
+
+  showAllGroups: function(req, res){
+    Group.find(function(err, students){
+        if(err){
+          res.status(500).send(err)
+        } else {
+          res.send(students);
+        }
+    });
   }
 
 }// end of moduleExports

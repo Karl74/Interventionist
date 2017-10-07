@@ -4,6 +4,40 @@
 // !==++===================================================================!
 
     var activeTeam = ["not assigned"];
+
+// ==|f0| == DISPLAY the existen group pills
+// Call By: Loading and refresh page
+// Parameters:
+
+  function callGroupPills(){
+    $.get("/api/app/allGroups", function(data){
+      console.log(data);
+
+      for(i = 0; i <data.length; i++){
+        groupPill(data[i].groupName, $(".group-display"), i);
+      }
+    });
+  }
+
+// ==|f0| == CREATE group pills
+// Call By: callGroupPills()
+// Parameters:name of the group, parent div and index
+
+  function groupPill(groupName, parent, i){
+    var pillGroup = $("<div>");
+    pillGroup.attr("class", "group-pill pill");
+    pillGroup.data("index", i);
+    pillGroup.html(groupName);
+    parent.append(pillGroup);
+
+    pillGroup.on("click", function(){
+      showASection($(".createAndEdit"));
+      getStudentsFromDb()
+    })
+  }
+
+callGroupPills();
+
 // ==|f1|== MAKE A CARD VISIBLE
     // Call by: Event handler --> #createNewGroup
     //Parameters: the div hide element to turn visible
@@ -76,8 +110,13 @@
     $(".stu-dis").empty();
     $.get("/api/app/allthestudents", function(data){
       console.log(data);
+
       for(i = 0; i < data.length; i++){
-        studentPill(data[i].stuName, $("#notMembers"), data, i);
+        if(data[i].stuGroups.indexOf(activeTeam) == -1){
+          studentPill(data[i].stuName, $("#notMembers"), data, i);
+        } else {
+          studentPill(data[i].stuName, $("#members"), data, i);
+        }
       };
     });
   }
@@ -124,5 +163,4 @@
     $.post("/api/group/updatestudent", groupUpdate, function(data){
       console.log(data);
     })
-
   }
