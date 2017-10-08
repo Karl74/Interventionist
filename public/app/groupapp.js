@@ -5,7 +5,7 @@
 
     var activeTeam = ["not assigned"];
 
-// ==|f0| == DISPLAY the existen group pills
+// ==|f1| == DISPLAY the existen group pills
 // Call By: Loading and refresh page
 // Parameters:
 
@@ -14,31 +14,40 @@
       console.log(data);
 
       for(i = 0; i <data.length; i++){
-        groupPill(data[i].groupName, $(".group-display"), i);
+      //CallBack: f2
+        groupPill(data[i].groupName, $(".group-display"), data[i]._id);
       }
     });
   }
 
-// ==|f0| == CREATE group pills
+// ==|f2| == CREATE group pills
 // Call By: callGroupPills()
 // Parameters:name of the group, parent div and index
 
-  function groupPill(groupName, parent, i){
+  function groupPill(groupName, parent, group_id){
     var pillGroup = $("<div>");
     pillGroup.attr("class", "group-pill pill");
-    pillGroup.data("index", i);
+    // pillGroup.data("index", i);
     pillGroup.html(groupName);
     parent.append(pillGroup);
 
+    // == |e1| ==  CHANGE the activeTeam
+                // MAKE the "Student Pills Sections" visible
+               // GET AND SORT the students pill
+    // Call to: showASection(), getStudentsFromDb()
     pillGroup.on("click", function(){
+      activeTeam.push(group_id);
+      activeTeam.shift();
+    //CallBack f3
       showASection($(".createAndEdit"));
+    //CallBack f6
       getStudentsFromDb()
     })
   }
 
 callGroupPills();
 
-// ==|f1|== MAKE A CARD VISIBLE
+// ==|f3|== MAKE A CARD VISIBLE
     // Call by: Event handler --> #createNewGroup
     //Parameters: the div hide element to turn visible
 
@@ -46,7 +55,7 @@ callGroupPills();
       givenClass.css("display", "block");
     }
 
-// ==|f2|== HIDE A CARD
+// ==|f4|== HIDE A CARD
     // Call by: Event handler --> #createNewGroup
     //Parameters: the div element to be hidden
 
@@ -54,12 +63,14 @@ callGroupPills();
       givenClass.css("display", "none");
     }
 
-// ==|e1| == DISPLAY the "NEW GROUP CARD"
+// ==|e2| == DISPLAY the "NEW GROUP CARD"
     // Call To:  showASection(), hideASection()
     //Parameters: .createAndEdit, #addStudentsButton, .createNewGroup
 
     $("#createNewGroup").on("click", function(){
+    //CallBack f4
       hideASection($(".createAndEdit"));
+    //CallBack f3
       showASection($("#addStudentsButton"));
       showASection($(".createNewGroup"));
       $("#groupName").val("");
@@ -83,7 +94,7 @@ callGroupPills();
     //   MODIFY THE STUDENT SCHEMA
 
 
-// ==|f3|== POST A NEW GROUP ON THE DB
+// ==|f5|== POST A NEW GROUP ON THE DB
     // Call by: Event handler --> #addStudentsButton
     //variables: Global activeTeam, Local: newGroupObject
 
@@ -102,7 +113,7 @@ callGroupPills();
     });
   }
 
-// == |f4| == RENDER the students Pills not included in a Team
+// == |f6| == RENDER the students Pills not included in a Team
     // Call By: Event handler --> #addStudentsButton
     // variables: Global activeTeam
 
@@ -110,47 +121,57 @@ callGroupPills();
     $(".stu-dis").empty();
     $.get("/api/app/allthestudents", function(data){
       console.log(data);
-
+      $("#notMembers").empty();
+      $("#members").empty();
       for(i = 0; i < data.length; i++){
-        if(data[i].stuGroups.indexOf(activeTeam) == -1){
-          studentPill(data[i].stuName, $("#notMembers"), data, i);
+        if(data[i].stuGroups.indexOf(activeTeam.toString()) == -1){
+        //CallBack f7
+          studentPill(data[i].stuName, $("#notMembers"), data, i, "notMembers");
         } else {
-          studentPill(data[i].stuName, $("#members"), data, i);
+          studentPill(data[i].stuName, $("#members"), data, i, "member" );
         }
       };
     });
   }
 
-// ==|f5|== Create a student pill
+// ==|f7|== CREATE a student pill.
     // Call By: getStudentsFromDb()
     //Parameters: stuName, parent component, array index
     //variables : local pillStu
     //THIS FUNCTION IS USED ON STUDENT APP.JS WITH A DIFFRENT CLICK EVENT
 
-  function studentPill(stuName, parent, data, i){
+  function studentPill(stuName, parent, data, i, statusValue){
     var pillStu = $("<div>");
     pillStu.attr("class", "student-pill pill");
     pillStu.attr("id", stuName);
-    pillStu.data("index", i);
+    pillStu.data("status", statusValue);
+    // console.log(pillStu.data)
     pillStu.html(stuName);
     parent.append(pillStu);
 
+    // == |e3| == UPDATE post the student data to the server
     pillStu.on("click", function(){
+    // CallBack: f8
+    console.log($(this).data("status"));
       updateStudentGroup(data, i , activeTeam);
+      getStudentsFromDb()
     });
   }
 
-  // ==|e1| == DISPLAY the "NEW GROUP CARD"
+  // ==|e4| == DISPLAY the "NEW GROUP CARD"
       // Call To:  showASection(), createNewGroup();
       //Parameters: .createAndEdit, #addStudentsButton, .createNewGroup
 
   $("#addStudentsButton").on("click", function(){
+  // CallBack f5
     createNewGroup();
+  // CallBack f3
     showASection($(".createAndEdit"));
+  // CallBack f6
     getStudentsFromDb();
   })
 
-// ==|f6| == UPDATE the studentTeam on the database
+// ==|f8| == UPDATE the studentTeam on the database
   // Call By: Student Pill event handler
   // Parameters: grpup ObjectId
 
