@@ -19,7 +19,7 @@ var router = new express.Router();
 
   // get all the groups in the collection
     router.get("/app/allGroups", orms.showAllGroups);
-  
+
 // | U | UDATE QUERIES =============================================
 
   // Update the student info from student.html
@@ -29,7 +29,7 @@ var router = new express.Router();
     router.post("/group/updatestudent",orms.updateStudentTeam);
 
 // | D | DELETE QUERIES =============================================
-
+    router.post("/group/deletestudentteam",orms.deleteStudentTeam);
 // | N | NAVIGATION  +++++==========================================
 
   // 1 - Lesson.html

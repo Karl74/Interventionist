@@ -50,7 +50,16 @@ module.exports = {
   updateStudentTeam: function(req, res){
     console.log(req.body);
     Student.findOneAndUpdate({_id: req.body._id},
-        {stuGroups: req.body.stuGroups}).then(function(doc){
+        {$push: {stuGroups: req.body.stuGroups}}).then(function(doc){
+          res.json(doc)}).catch(function(err){
+            res.json(err);
+          });
+  },
+
+  deleteStudentTeam: function(req, res){
+    console.log(req.body);
+    Student.findOneAndUpdate({_id: req.body._id},
+        {$pull: {stuGroups: req.body.stuGroups}}).then(function(doc){
           res.json(doc)}).catch(function(err){
             res.json(err);
           });

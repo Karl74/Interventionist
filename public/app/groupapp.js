@@ -1,11 +1,12 @@
 
 // !=======================================================================!
-// !                    FUNCTIONS FOR TEAMS.HTML                         !
+// !                    FUNCTIONS FOR TEAMS.HTML                           !
 // !==++===================================================================!
 
     var activeTeam = ["not assigned"];
+    var studentsInGroup = [];
 
-// ==|f1| == DISPLAY the existen group pills
+// ==|f1| == DISPLAY the existing group pills fro, the DB
 // Call By: Loading and refresh page
 // Parameters:
 
@@ -27,7 +28,6 @@
   function groupPill(groupName, parent, group_id){
     var pillGroup = $("<div>");
     pillGroup.attr("class", "group-pill pill");
-    // pillGroup.data("index", i);
     pillGroup.html(groupName);
     parent.append(pillGroup);
 
@@ -40,6 +40,7 @@
       activeTeam.shift();
     //CallBack f3
       showASection($(".createAndEdit"));
+      $(".groupNameCont").html(groupName);
     //CallBack f6
       getStudentsFromDb()
     })
@@ -78,22 +79,6 @@ callGroupPills();
       $("#tier").val("");
     });
 
-// ==== PLAN ======
-    // CREATE THE NEW TEAM DOCUMENT IN THE DB
-    // OPEN THE CARD THAT HOLDS THE STUDENT PILLS
-    // AJAX CALL FOR THE STUDENTS IN THE STUDENT COLLECTION THAT
-    // DO NOT BELONG TO THE TEAM
-    // DISPLAY THE STUDENT PILLS IN THE CARD
-    //
-    // AJAX CALL TO UPDATE THE TEAM DOCUMENT
-    // AJAX CALL TO UPDATE THE STUDENT DOCUMENT
-    // FUNCTION THAT RENDER THE SELECTED STUDENT INTO THE TEAM CARD
-    // AJAX CALL TO REFRESH THE STUDENTS THAT DO NOT BELOG TO THE TEAM
-    //
-    // PLUS :
-    //   MODIFY THE STUDENT SCHEMA
-
-
 // ==|f5|== POST A NEW GROUP ON THE DB
     // Call by: Event handler --> #addStudentsButton
     //variables: Global activeTeam, Local: newGroupObject
@@ -119,6 +104,7 @@ callGroupPills();
 
   function getStudentsFromDb(){
     $(".stu-dis").empty();
+    studentsInGroup = [];
     $.get("/api/app/allthestudents", function(data){
       console.log(data);
       $("#notMembers").empty();
@@ -126,11 +112,13 @@ callGroupPills();
       for(i = 0; i < data.length; i++){
         if(data[i].stuGroups.indexOf(activeTeam.toString()) == -1){
         //CallBack f7
-          studentPill(data[i].stuName, $("#notMembers"), data, i, "notMembers");
+          studentPill(data[i].stuName, $("#notMembers"), data, i, "notMember");
         } else {
           studentPill(data[i].stuName, $("#members"), data, i, "member" );
+          studentsInGroup.push(data[i]._id);
         }
       };
+      console.log(studentsInGroup);
     });
   }
 
@@ -151,10 +139,18 @@ callGroupPills();
 
     // == |e3| == UPDATE post the student data to the server
     pillStu.on("click", function(){
-    // CallBack: f8
-    console.log($(this).data("status"));
-      updateStudentGroup(data, i , activeTeam);
-      getStudentsFromDb()
+      console.log($(this).data("status"));
+     if( $(this).data("status") == "notMember"){
+       // CallBack: f8
+       updateStudentGroup(data, i , activeTeam);
+       studentsInGroup.push(data[i]._id)
+       console.log(studentsInGroup);
+       // CallBack: f6
+       getStudentsFromDb();
+     } else {
+       deleteStudentGroup(data, i, activeTeam)
+       getStudentsFromDb();
+     }
     });
   }
 
@@ -172,8 +168,8 @@ callGroupPills();
   })
 
 // ==|f8| == UPDATE the studentTeam on the database
-  // Call By: Student Pill event handler
-  // Parameters: grpup ObjectId
+  // Call By: Student Pill event handler (e3)
+  // Parameters: group ObjectId, data = the list of the students, i
 
   function updateStudentGroup(data, i, groupId){
     var groupUpdate = {
@@ -185,3 +181,26 @@ callGroupPills();
       console.log(data);
     })
   }
+
+// ==|f9| == DELETE the groupId from a student
+    //Call By: Student Pill event handler (e3)
+    // Parameters: group ObjectId, data = the list of the students, i
+
+    function deleteStudentGroup(data, i, groupId){
+      var groupUpdate = {
+        _id: data[i]._id,
+        stuGroups: groupId
+      };
+
+      $.post("/api/group/deletestudentteam", groupUpdate, function(data){
+        console.log(data);
+      })
+    }
+
+// == |f10| == ADD  students Id to the collection groups
+      // Call By: "Save Changes Button" event handler
+      // variables: local teamMembers
+
+    function updateStudentsToGroup(){
+
+    }
