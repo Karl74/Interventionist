@@ -28,6 +28,11 @@ var router = new express.Router();
   //update the student group from group.html
     router.post("/group/updatestudent",orms.updateStudentTeam);
 
+  // update the group schema with the student Id's from group.html
+    router.post("/group/studentstoteam", orms.pushStudentIds);
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 // | D | DELETE QUERIES =============================================
     router.post("/group/deletestudentteam",orms.deleteStudentTeam);
 // | N | NAVIGATION  +++++==========================================

@@ -101,6 +101,7 @@ callGroupPills();
 // == |f6| == RENDER the students Pills not included in a Team
     // Call By: Event handler --> #addStudentsButton
     // variables: Global activeTeam
+    // if one day something goes wrong is here!!!
 
   function getStudentsFromDb(){
     $(".stu-dis").empty();
@@ -197,10 +198,20 @@ callGroupPills();
       })
     }
 
-// == |f10| == ADD  students Id to the collection groups
+// == |f10| == POST  students Ids to the collection groups at the db
       // Call By: "Save Changes Button" event handler
       // variables: local teamMembers
 
     function updateStudentsToGroup(){
+      var updateGroupObject = {_id: activeTeam, array: studentsInGroup};
+      $.post("/api/group/studentstoteam",updateGroupObject, function(data){
+        console.log(data);
+      });
+    };
 
-    }
+// == |e | == call the ajax function to add the students id to their belonging group
+  // Call To: updateStudentsToGroup() f10
+
+  $("#saveGroup").on("click", function(){
+    updateStudentsToGroup();
+  });
