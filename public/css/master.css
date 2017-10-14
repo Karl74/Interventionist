@@ -289,6 +289,14 @@ textarea{
   display: none;
 }
 
+/* ======== lessons and evaluation html =========================== */
+.preset{
+  display: none;
+}
+
+.recordBox{
+  display: none;
+}
 /*== EXPANDED PANNELS ===================================*/
 .childExpanded{
   height: 59px;

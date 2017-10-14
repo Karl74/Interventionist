@@ -5,10 +5,6 @@ module.exports = {
 
   //CREATE new Student
   addStudent: function(req, res){
-    console.log("test");
-    console.log(req.body);
-    console.log("+++++++++++++");
-    console.log(req.body._id);
     Student.create(req.body).then(function(doc){
       res.json(doc)}).catch(function(err){
         res.json(err);
@@ -27,7 +23,6 @@ module.exports = {
   },
 
   editAStudent: function(req, res){
-    console.log("test");
 
     Student.findOneAndUpdate({_id: req.body._id},
        {stuName: req.body.stuName,
@@ -39,8 +34,6 @@ module.exports = {
   },
 
   addGroup: function(req, res){
-    console.log("test");
-    console.log(req.body);
     Group.create(req.body).then(function(doc){
       res.json(doc)}).catch(function(err){
         res.json(err);
@@ -48,16 +41,14 @@ module.exports = {
   },
 
   updateStudentTeam: function(req, res){
-    console.log(req.body);
     Student.findOneAndUpdate({_id: req.body._id},
-        {$push: {stuGroups: req.body.stuGroups}}).then(function(doc){
+        {$addToSet: {stuGroups: req.body.stuGroups}}).then(function(doc){
           res.json(doc)}).catch(function(err){
             res.json(err);
           });
   },
 
   deleteStudentTeam: function(req, res){
-    console.log(req.body);
     Student.findOneAndUpdate({_id: req.body._id},
         {$pull: {stuGroups: req.body.stuGroups}}).then(function(doc){
           res.json(doc)}).catch(function(err){
@@ -77,7 +68,7 @@ module.exports = {
 
   pushStudentIds: function(req, res){
     Group.findOneAndUpdate({_id:req.body._id},
-    {$push:{groupStudents:req.body.studentId}}).then(function(doc){
+    {$addToSet:{groupStudents:req.body.studentId}}).then(function(doc){
       res.json(doc)}).catch(function(err){
         res.json(err);
       });
@@ -90,7 +81,7 @@ module.exports = {
         res.json(err);
       });
     }
-  
+
 
 
 }// end of moduleExports
