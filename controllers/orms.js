@@ -76,19 +76,21 @@ module.exports = {
   },
 
   pushStudentIds: function(req, res){
-    console.log(req.body.array);
-    Group.findOneAndUpdate({_id: req.body._id},
-        // {$addToSet: {groupStudents:{$each: req.body.array}}}).then(function(doc){
-        {$pull: groupStudents:[]).then(function(doc){
-          res.json(doc)}).catch(function(err){
-            res.json(err);
-          });
-  }
-  //
-  // .then(
-  //   Group.findOneAndUpdate({_id: req.body._id},
-  //     {$push: {groupStudents:req.body.array}}
-  // ))
+    Group.findOneAndUpdate({_id:req.body._id},
+    {$push:{groupStudents:req.body.studentId}}).then(function(doc){
+      res.json(doc)}).catch(function(err){
+        res.json(err);
+      });
+  },
+
+  pullStudentIds: function(req, res){
+    Group.findOneAndUpdate({_id:req.body._id},
+    {$pull:{groupStudents:req.body.studentId}}).then(function(doc){
+      res.json(doc)}).catch(function(err){
+        res.json(err);
+      });
+    }
+  
 
 
 }// end of moduleExports

@@ -34,7 +34,14 @@ var router = new express.Router();
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // | D | DELETE QUERIES =============================================
+
+  // deletes the team id from the student schema
     router.post("/group/deletestudentteam",orms.deleteStudentTeam);
+
+  // delete the studentId from the group scheme
+
+    router.post("/group/deletestudent", orms.pullStudentIds);
+
 // | N | NAVIGATION  +++++==========================================
 
   // 1 - Lesson.html

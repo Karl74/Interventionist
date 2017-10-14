@@ -144,12 +144,14 @@ callGroupPills();
      if( $(this).data("status") == "notMember"){
        // CallBack: f8
        updateStudentGroup(data, i , activeTeam);
-       studentsInGroup.push(data[i]._id)
+       studentsInGroup.push(data[i]._id);
+       pushStudentIdToGroup(data[i]._id);
        console.log(studentsInGroup);
        // CallBack: f6
        getStudentsFromDb();
      } else {
-       deleteStudentGroup(data, i, activeTeam)
+       deleteStudentGroup(data, i, activeTeam);
+       pullStudetFromGroup(data[i]._id);
        getStudentsFromDb();
      }
     });
@@ -198,20 +200,24 @@ callGroupPills();
       })
     }
 
-// == |f10| == POST  students Ids to the collection groups at the db
-      // Call By: "Save Changes Button" event handler
-      // variables: local teamMembers
+// == |f10| == POST  Add students Ids to the collection groups at the db
+      // Call By: Student Pill event handler (e3)
+      // variables: local updateGroupObject
 
-    function updateStudentsToGroup(){
-      var updateGroupObject = {_id: activeTeam, array: studentsInGroup};
+    function pushStudentIdToGroup(studentId){
+      var updateGroupObject = {_id: activeTeam, studentId: studentId};
       $.post("/api/group/studentstoteam",updateGroupObject, function(data){
         console.log(data);
       });
     };
 
-// == |e | == call the ajax function to add the students id to their belonging group
-  // Call To: updateStudentsToGroup() f10
+// == |f11| == POST Delete student Id from the group collection.
+        // Call By: Student Pill event handler (e3)
+        // variables: Local updateGroupObject
 
-  $("#saveGroup").on("click", function(){
-    updateStudentsToGroup();
-  });
+    function pullStudetFromGroup(studentId){
+      var updateGroupObject = {_id: activeTeam, studentId: studentId};
+      $.post("/api/group/deletestudent", updateGroupObject, function(data){
+        console.log(data);
+      });
+    }
