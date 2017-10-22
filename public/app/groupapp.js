@@ -56,6 +56,7 @@ callGroupPills();
       givenClass.css("display", "block");
     }
 
+
 // ==|f4|== HIDE A CARD
     // Call by: Event handler --> #createNewGroup
     //Parameters: the div element to be hidden

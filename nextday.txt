@@ -8,3 +8,37 @@ write the ajax post for create a student
 
 write the ajax call for find all the students
 connect the existing with the ajax call result
+
+
+
+// == |f5| == Creates the individual container for each student controller
+  //Call by: function getStudentsFromDb
+  // callBack: createStudentPill(), createGradeControls()
+
+  function createStudentRow(stuName, stuId){
+      //L-256
+    var studentRow = $("<div>");
+    studentRow.attr("class", "studentControl");
+    createStudentPill(studentRow, stuName, stuId);
+    // createGradeControls(studentRow);
+
+    $("#evalTable").append(studentRow);
+  };
+
+//==|f6| == CREATES a student pill
+  // Call by: f5 createStudentRow
+  // Parameters: appendIn, stuName, stuId
+
+  createStudentPill = function(appendIn, stuName, stuId){
+    // ATRIBUTES: none.
+    // F: Creates oval button with grade value.
+    var studPill = $("<div>");
+    studPill.html(stuName);
+    studPill.attr("class", "student-pill pill");
+    studPill.data("id", stuId);
+    appendIn.append(studPill);
+  };
+
+//==|f7| == CREATES grade controls
+    // Call by: f5 createStudentRow()
+    // Parameters: appendInn,
