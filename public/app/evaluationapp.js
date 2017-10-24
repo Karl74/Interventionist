@@ -2,14 +2,14 @@
 // !                    FUNCTIONS FOR EVALUATION.HTML                           !
 // !==++===================================================================!
 
-  var activeTeam = ["not assigned"];
+  var activeTeam = "not assigned";
 
-  var evaluationGrades = [{name:"empty", grade:"empty"}];
+  var evaluationGrades = [{studentId:"empty", grade:"empty"}];
 
   var evaluationObject = {
     evaluationName: "",
     evaluationDate: "",
-    groupEvaluated:"",
+    groupEvaluated: activeTeam,
     evaluationGrades:[]
   }
 
@@ -42,8 +42,8 @@
                // GET AND SORT the students pill
     // Call to: showASection() f3, getStudentsFromDb() f4,
     pillGroup.on("click", function(){
-      activeTeam.push(group_id);
-      activeTeam.shift();
+      activeTeam = group_id;
+      evaluationObject.groupEvaluated = group_id;
       $("#teamName").html(groupName);
     //CallBack f3
       showASection($(".preset"));
@@ -72,7 +72,8 @@ callGroupPills();
     event.preventDefault();
     $("#displayEvName").html($("#evName").val());
     evaluationObject.evaluationName = $("#evName").val();
-    $("#displayEvDate").html("&nbsp" + $("#evDate").val());
+    $("#displayEvDate").html($("#evDate").val());
+    evaluationObject.evaluationDate = $("#evDate").val();
     showASection($(".recordBox"));
   });
 
@@ -164,7 +165,7 @@ callGroupPills();
       ovalPill.data("value", value);
       place.append(ovalPill);
 
-      var that = this.name;
+      var that = this.id;
       var thefunction = this.recordGrade;
 
     //==|e3|== INPUTS the grade value in the text box and the gradesObject
@@ -177,16 +178,16 @@ callGroupPills();
       });
     };
 
-    this.recordGrade = function(name, grade){
+    this.recordGrade = function(studentId, grade){
     //==|f13|== WRITES OR UPDATES the student's grade
       // Call By: ovalPill event handler
       // Variables: GLOBAL evaluationGrades
       var recorded = true;
 
       for(i = 0; i < evaluationGrades.length; i++){
-        if(evaluationGrades[i].name === name){
+        if(evaluationGrades[i].studentId === studentId){
           console.log("already recorded");
-          evaluationGrades.splice(i,1,{name:name, grade:grade});
+          evaluationGrades.splice(i,1,{studentId:studentId, grade:grade});
           recorded = true;
           break;
         } else {
@@ -195,7 +196,7 @@ callGroupPills();
         }
       }
       if(recorded === false){
-        evaluationGrades.push({name:name, grade:grade});
+        evaluationGrades.push({studentId:studentId, grade:grade});
       }
     };
 
@@ -223,6 +224,15 @@ callGroupPills();
       students[e].createStudentRow();
     };
   };
+
+// == |f14| == POST The evaluation object into the db
+  // Call By: Submit button event handler e4
+
+  function postEvaluation(){
+    $.post("/api/evaluation/newevaluation", evaluationObject, function(data){
+      console.log(data);
+    });
+  }
 
 // == |e4| == POST the evaluation object into the db
   // CallBack:
