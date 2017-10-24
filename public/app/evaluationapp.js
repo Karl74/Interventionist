@@ -116,9 +116,9 @@ callGroupPills();
     this.id = id;
 
     this.createStudentRow = function(){
-      // CREATE the divs to append students controls
+    //==|f9|== CREATE the divs to append students controls
       // CallBy: external function .......... COMPLETE THIS COMMENT
-      // CallBack: createStudentPill() and createGradeControls
+      // CallBack: this.createStudentPill() and this.createGradeControls
       var studentRow = $("<div>");
       studentRow.attr("class", "studentControl");
       this.createStudentPill(studentRow);
@@ -127,7 +127,7 @@ callGroupPills();
     };
 
     this.createStudentPill = function(appendIn){
-      // CREATE the studens pills
+    // ==|f10|== CREATE the studens pills
       // CallBy: this.createStudentRow()
       var studPill = $("<div>");
       studPill.html(this.name);
@@ -136,16 +136,17 @@ callGroupPills();
     };
 
     this.createGradeControls = function(place){
-      //Create the control container and append it.
+    //==|f11|== CREATES the control container and append it.
+      // Call By: this.createStudentRow()
+      // CallBack: this.createOvalPills()
       var controlContainer = $("<div>");
       controlContainer.attr("class", "assignGrades");
       place.append(controlContainer);
 
-      //create the imput variable with full features
       var inputText = $("<input>");
       inputText.val("");
       controlContainer.append(inputText);
-      //create the oval pill with calling function
+
       this.createOvalPills("50/F", 50, controlContainer, inputText);
       this.createOvalPills("60/F", 60, controlContainer, inputText);
       this.createOvalPills("70/F", 70, controlContainer, inputText);
@@ -154,28 +155,32 @@ callGroupPills();
       this.createOvalPills("100/F", 100, controlContainer, inputText);
     };
 
-    this.createOvalPills = function(name, value, place, field){
-      // PARAMETERS: name and value of the oval pill container.
-      // IMPORTANT: PARAMETER "name" is the label to be written in the pill. It is not the student name
-      // F: Creates oval button with grade value.
+    this.createOvalPills = function(label, value, place, field){
+    //==|f12|== CREATES  each ovalbutton with grade value.
+      // Call By: this.createGradeControls();
       var ovalPill = $("<div>");
-      ovalPill.html(name);
+      ovalPill.html(label);
       ovalPill.attr("class", "input-pill ovalPill");
       ovalPill.data("value", value);
       place.append(ovalPill);
+
       var that = this.name;
       var thefunction = this.recordGrade;
-      // var thisStudentRecord = this.studentRecord;
 
-        ovalPill.on("click", function(){
-        console.log($(this).data("value"));
-        field.val($(this).data("value"));
-        thefunction(that, $(this).data("value"));
-        console.log(evaluationGrades);
+    //==|e3|== INPUTS the grade value in the text box and the gradesObject
+      // CallBack: this.recordGrade()
+      ovalPill.on("click", function(){
+      console.log($(this).data("value"));
+      field.val($(this).data("value"));
+      thefunction(that, $(this).data("value"));
+      console.log(evaluationGrades);
       });
     };
 
     this.recordGrade = function(name, grade){
+    //==|f13|== WRITES OR UPDATES the student's grade
+      // Call By: ovalPill event handler
+      // Variables: GLOBAL evaluationGrades
       var recorded = true;
 
       for(i = 0; i < evaluationGrades.length; i++){
@@ -194,7 +199,6 @@ callGroupPills();
       }
     };
 
-
   };// end studentObject
 
 // == |f7| == CONSTRUCTS the student's objects
@@ -209,7 +213,7 @@ callGroupPills();
     renderStudents(students);
   };
 
-// == |f7| == CONSTRUCTS the student's objects
+// == |f8| == DISPLAYS students controlls for evaluation
   // Call By: createStudentObj() f7
   // CallBack: student[e].createStudentRow()
 
@@ -219,3 +223,14 @@ callGroupPills();
       students[e].createStudentRow();
     };
   };
+
+// == |e4| == POST the evaluation object into the db
+  // CallBack:
+
+  $("#submitBtn").on("click", function(){
+    event.preventDefault();
+    console.log("hey");
+    evaluationGrades.shift();
+    evaluationObject.evaluationGrades = evaluationGrades;
+    console.log(evaluationObject);
+  });
