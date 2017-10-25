@@ -243,4 +243,5 @@ callGroupPills();
     evaluationGrades.shift();
     evaluationObject.evaluationGrades = evaluationGrades;
     console.log(evaluationObject);
+    postEvaluation();
   });

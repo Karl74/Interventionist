@@ -1,5 +1,6 @@
 var Student = require("../models/Student.js");
 var Group = require("../models/Group.js");
+var Evaluation = require("../models/Evaluation.js");
 
 module.exports = {
 
@@ -80,8 +81,14 @@ module.exports = {
       res.json(doc)}).catch(function(err){
         res.json(err);
       });
+    },
+
+    //CREATE a new Evaluation.
+    createNewEvaluation: function(req, res){
+      Evaluation.create(req.body).then(function(doc){
+        res.json(doc)}).catch(function(err){
+          res.json(err);
+        });
     }
-
-
 
 }// end of moduleExports

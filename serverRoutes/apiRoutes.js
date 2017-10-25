@@ -11,6 +11,9 @@ var router = new express.Router();
 //students.html ADD A STUDENT
   router.post("/groups/newgroup", orms.addGroup);
 
+//Evaluations.html ADD AN Evaluation
+  router.post("/evaluation/newevaluation", orms.createNewEvaluation);
+
 
 // | R | READ QUERIES =============================================
 
