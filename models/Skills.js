@@ -1,0 +1,15 @@
+var mongoose = require("mongoose");
+var schema = mongoose.Schema;
+
+var skillSchema = new Schema({
+  skillName:{type:String, required:true, unique: true},
+
+  skillSubject: {type: String},
+
+  skillOrigin:{type:String, default:"custom"},
+
+  mySkill:{type:Boolean}
+});
+
+var Skill = mongoose.model("Skill", skillSchema);
+module.exports = Skill;

@@ -47,11 +47,9 @@
       $("#teamName").html(groupName);
     //CallBack f3
       showASection($(".preset"));
-      $(".groupNameCont").html(groupName);
     //CallBack f6
       getStudentsFromDb();
-
-    })
+    });
   }
 
 callGroupPills();

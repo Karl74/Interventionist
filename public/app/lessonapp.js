@@ -1,7 +1,18 @@
-
 // !=======================================================================!
 // !                    FUNCTIONS FOR LESSON.HTML                           !
 // !==++===================================================================!
+
+var activeTeam = "not assigned";
+
+var lessonRecordedPerformace = [{StudentId:"empty", performance:"empty"}];
+
+var lessonObject = {
+  lessonSkill: "",
+  lessonDate: "",
+  lessonGroup: activeTeam,
+  lessonGrades:[],
+  lessonNotes:[],
+}
 
 // ==|f1| == DISPLAY the existing group pills fro, the DB
 // Call By: Loading and refresh page
@@ -10,7 +21,6 @@
   function callGroupPills(){
     $.get("/api/app/allGroups", function(data){
       console.log(data);
-
       for(i = 0; i <data.length; i++){
       //CallBack: f2
         groupPill(data[i].groupName, $(".group-display"), data[i]._id);
@@ -33,14 +43,23 @@
                // GET AND SORT the students pill
     // Call to: showASection(), getStudentsFromDb()
     pillGroup.on("click", function(){
-      activeTeam.push(group_id);
-      activeTeam.shift();
+      activeTeam = group_id;
+      lessonObject.lessonGroup = group_id;
+      $("#teamName").html(groupName);
     //CallBack f3
-      showASection($(".createAndEdit"));
-      $(".groupNameCont").html(groupName);
+      showASection($(".preset"));
+      // $(".groupNameCont").html(groupName);
     //CallBack f6
-      getStudentsFromDb()
-    })
+      getStudentsFromDb();
+    });
   }
 
 callGroupPills();
+
+// ==|f3|== MAKE A CARD VISIBLE
+    // Call by: Event handler --> #createNewGroup
+    //Parameters: t he div hide element to turn visible
+
+  function showASection(givenClass){
+    givenClass.css("display", "block");
+  };

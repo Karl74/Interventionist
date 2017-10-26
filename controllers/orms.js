@@ -1,6 +1,7 @@
 var Student = require("../models/Student.js");
 var Group = require("../models/Group.js");
 var Evaluation = require("../models/Evaluation.js");
+var Skills = require("../models/Skills.js");
 
 module.exports = {
 
