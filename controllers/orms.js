@@ -4,7 +4,6 @@ var Evaluation = require("../models/Evaluation.js");
 var Skills = require("../models/Skills.js");
 
 module.exports = {
-
   //CREATE new Student
   addStudent: function(req, res){
     Student.create(req.body).then(function(doc){

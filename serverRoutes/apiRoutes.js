@@ -1,6 +1,7 @@
 var express = require("express");
 var path = require("path");
 var orms = require("../controllers/orms");
+var seeder = require("../controllers/seeder");
 
 var router = new express.Router();
 
@@ -78,6 +79,15 @@ var router = new express.Router();
     router.get("/groups", function(req, res){
       res.sendFile(path.join(__dirname, "../public/teams.html"))
     });
+
+  // 7 - newuser.html
+    router.get("/newuser", function(req, res){
+      res.sendFile(path.join(__dirname, "../public/newuser.html"))
+    });
+
+// | U | USER SETUP  +++++==========================================
+  // 1 - Default skills
+    router.post("/setup/defaultskills", seeder.seedSkills);
 
 
 module.exports = router;

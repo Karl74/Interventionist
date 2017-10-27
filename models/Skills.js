@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-var schema = mongoose.Schema;
+var Schema = mongoose.Schema;
 
 var skillSchema = new Schema({
   skillName:{type:String, required:true, unique: true},
