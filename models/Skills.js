@@ -6,7 +6,7 @@ var skillSchema = new Schema({
 
   skillSubject: {type: String},
 
-  skillOrigin:{type:String, default:"custom"},
+  skillOrigin:{type:String},
 
   mySkill:{type:Boolean}
 });

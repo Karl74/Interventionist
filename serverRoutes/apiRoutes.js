@@ -24,7 +24,7 @@ var router = new express.Router();
   // get all the groups in the collection
     router.get("/app/allGroups", orms.showAllGroups);
 
-  // get all the skilss in the database
+  // get all the skills in the database
     router.get("/app/allskills", orms.showAllSkills);
 
 // | U | UDATE QUERIES =============================================
