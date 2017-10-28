@@ -89,6 +89,18 @@ module.exports = {
         res.json(doc)}).catch(function(err){
           res.json(err);
         });
+    },
+
+    //READ all the Students
+    showAllSkills: function(req, res){
+      Skills.find(function(err, skills){
+          if(err){
+            res.status(500).send(err)
+          } else {
+            res.send(skills);
+          }
+      });
     }
+
 
 }// end of moduleExports
