@@ -50,16 +50,39 @@ var lessonObject = {
       showASection($(".preset"));
       // $(".groupNameCont").html(groupName);
     //CallBack f6
-      getStudentsFromDb();
+      getMyskills()
     });
   }
 
 callGroupPills();
 
 // ==|f3|== MAKE A CARD VISIBLE
-    // Call by: Event handler --> #createNewGroup
-    //Parameters: t he div hide element to turn visible
+    // Call by: Event handler --> PillGroup
+    //Parameters: the div hide element to turn visible
 
   function showASection(givenClass){
     givenClass.css("display", "block");
   };
+
+//== |f4| == GET my skills from db
+    // Call By: Event handler --> PillGroup
+    // CallBack: create skillPills();
+
+  function getMyskills(){
+    $.get("/api/app/myskills", function(data){
+      console.log(data);
+      createSkillPill(data, $(".lessonSkillBox"));
+    })
+  }
+
+// == f5 == CREATES and APPENDS skill Pills
+  // Call by: getMyskills()f4
+
+  function createSkillPill(data, appendIn){
+    for(i=0; i<data.length; i++){
+      var skillPill = $("<div>");
+      skillPill.attr("class", " pill skill-pill");
+      skillPill.html(data[i].skillName)
+      appendIn.append(skillPill);
+    }
+  }

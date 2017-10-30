@@ -109,6 +109,17 @@ module.exports = {
         res.json(doc)}).catch(function(err){
           res.json(err);
         });
+    },
+
+    //READ my skills only
+    showMySkills: function(req, res){
+      Skills.find({"mySkill":true}, function(err, skills){
+        if(err){
+          res.status(500).send(err)
+        } else {
+          res.send(skills);
+        }
+      });
     }
 
 

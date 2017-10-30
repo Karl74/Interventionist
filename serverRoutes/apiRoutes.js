@@ -29,6 +29,9 @@ var router = new express.Router();
   // get all the skills in the database
     router.get("/app/allskills", orms.showAllSkills);
 
+  // get myskills
+    router.get("/app/myskills", orms.showMySkills);
+
 // | U | UDATE QUERIES =============================================
 
   // Update the student info from student.html
