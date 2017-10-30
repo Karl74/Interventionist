@@ -91,7 +91,7 @@ module.exports = {
         });
     },
 
-    //READ all the Students
+    //READ all the skills
     showAllSkills: function(req, res){
       Skills.find(function(err, skills){
           if(err){
@@ -100,7 +100,17 @@ module.exports = {
             res.send(skills);
           }
       });
+    },
+
+    // CREATE  a new skill
+    createNewSkill: function(req, res){
+      console.log(req.body);
+      Skills.create(req.body).then(function(doc){
+        res.json(doc)}).catch(function(err){
+          res.json(err);
+        });
     }
+
 
 
 }// end of moduleExports

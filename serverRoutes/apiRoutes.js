@@ -12,9 +12,11 @@ var router = new express.Router();
 //students.html ADD A STUDENT
   router.post("/groups/newgroup", orms.addGroup);
 
-//Evaluations.html ADD AN Evaluation
+//Evaluations.html ADD AN EVALUATION
   router.post("/evaluation/newevaluation", orms.createNewEvaluation);
 
+// skills.html ADD A Skill
+  router.post("/skills/newSkill", orms.createNewSkill);
 
 // | R | READ QUERIES =============================================
 
