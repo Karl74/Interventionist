@@ -8,10 +8,10 @@ var lessonRecordedPerformace = [{StudentId:"empty", performance:"empty"}];
 
 var lessonObject = {
   lessonSkill: "",
-  lessonDate: "",
+  lessonDate: new Date(),
   lessonGroup: activeTeam,
   lessonGrades:[],
-  lessonNotes:[],
+  // lessonNotes:[],
 }
 
 // ==|f1| == DISPLAY the existing group pills fro, the DB
@@ -101,8 +101,9 @@ callGroupPills();
 
       skillPill.on("click", function(){
         showASection($(".recordBox"));
-        hideASection($(".lessonSkillBox"));
+        hideASection($(".preset"));
         $("#displayLessonSkill").html(label);
+        lessonObject.lessonSkill = label;
         console.log(label);
         getStudentsFromDb();
       });
@@ -153,7 +154,7 @@ callGroupPills();
     this.tallyCounter = 0;
 
     this.createStudentPill = function(appendIn){
-    //==|f13|==CREATES each studentPill
+    //==|f14|==CREATES each studentPill
     // Call by: createStudentControl()f15
       var studPill = $("<div>");
       studPill.html(this.name);
@@ -162,7 +163,7 @@ callGroupPills();
     };
 
     this.createLessonTools = function(){
-      //==|f14|== CREATES the div for display the individual student controls
+      //==|f15|== CREATES the div for display the individual student controls
       // Call by: ??????????????/  AJAX CALL ??????/
       // CallBack: this.createStudentControl() f??
       //          this.createBoxContainer() f??
@@ -175,7 +176,7 @@ callGroupPills();
     };
 
     this.createStudentControl= function(appenIn){
-      //==|f15|== CREATES the div for display  student controls
+      //==|f16|== CREATES the div for display  student controls
       // Call by: createLessonTools() f14
       // CallBack: this.createStudentPill() f13
       //          this.createLessonControls() f16
@@ -187,7 +188,7 @@ callGroupPills();
     };
 
     this.createLessonControls= function(appenIn){
-      //==|f16|== CREATES the div for the tally counters and boxes
+      //==|f17|== CREATES the div for the tally counters and boxes
       // Call by: createStudentControl() f15
       // CallBack: this.createCounter() f17
       //           this.createPerformaceBox() f18
@@ -201,7 +202,7 @@ callGroupPills();
     };
 
     this.createCounter = function(appenIn){
-      //==|f17|== CREATES all the tally counter controlls
+      //==|f18|== CREATES all the tally counter controlls
       // Call by: createLessonControls() f16
       var countDisplay = $("<input>");
       countDisplay.attr("class", "count-display");
@@ -231,7 +232,7 @@ callGroupPills();
     };
 
     this.createPerformaceBox = function(appenIn){
-      //==|f18|== CREATES the div for the performance controlls
+      //==|f19|== CREATES the div for the performance controlls
       // Call by: createLessonControls() f16
       // CallBack: this.performanceControls()f20
       var performanceDisplay = $("<div>");
@@ -241,7 +242,7 @@ callGroupPills();
     };
 
     this.createPerformancePill = function(label, appenIn, field){
-      //==|f19|== Create the performace pills
+      //==|f20|== Create the performace pills
       // Call by: this.performanceControls()f20
       var performancePill = $("<div>");
       performancePill.html(label);
@@ -261,7 +262,7 @@ callGroupPills();
     };
 
     this.performanceControls = function(appenIn){
-      //==|f20|== RENDERS the performace pills for: onlevel, above and under
+      //==|f21|== RENDERS the performace pills for: onlevel, above and under
       // Call by:createPerformaceBox
       //CallBack:this.createPerformancePill()f19
       var inputPerformance = $("<input>")
@@ -273,7 +274,7 @@ callGroupPills();
     };
 
     this.createButtonNoteButton = function(appenIn){
-      //==|f21|== CREATES the button for open the notes field
+      //==|f22|== CREATES the button for open the notes field
       //Call by: this.createLessonControls()f18
       var noteButton = $("<button>");
       noteButton.attr("class", "btn btn-primary");
@@ -282,7 +283,7 @@ callGroupPills();
     };
 
     this.createBoxContainer = function(appenIn){
-      //==|f22|== CREATES the div to locate the notes field
+      //==|f23|== CREATES the div to locate the notes field
       //Call by: this.createLessonControls()f14
       //CallBack: this.createNoteBox()f23
       var noteDiv = $("<div>");
@@ -292,7 +293,7 @@ callGroupPills();
     };
 
     this.createNoteBox = function(appenIn){
-      //==|f23|== CREATES the notes field
+      //==|f24|== CREATES the notes field
       //Call by: this.createBoxContainer()f22
         var noteBox = $("<textarea>");
         noteBox.attr({rows: "2", cols: "83"});
@@ -305,7 +306,7 @@ callGroupPills();
     };
 
     this.recordPerformance = function(name, performance){
-      //==|f24|== WRITES the records for the lesson for each individual student
+      //==|f25|== WRITES the records for the lesson for each individual student
       //Call by: Event handler --> performace Pill
       var recorded = true;
 
@@ -348,3 +349,23 @@ callGroupPills();
       students[e].createLessonTools();
     };
   };
+
+// == |f26| == POST The lesson object into the db
+  // Call By: Submit button event handler e4
+
+  function postLesson(){
+    $.post("/api/lesson/newlesson", evaluationObject, function(data){
+      console.log(data);
+    });
+  }
+
+  // == |e4| == POST the lesson object into the db
+    // CallBack: postLesson()
+
+$("#submitLesson").on("click", function(){
+  event.preventDefault();
+  lessonRecordedPerformace.shift();
+  lessonObject.lessonGrades = lessonRecordedPerformace;
+  console.log(lessonObject);
+  postLesson();
+});

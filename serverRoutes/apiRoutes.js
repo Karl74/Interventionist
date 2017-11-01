@@ -18,6 +18,9 @@ var router = new express.Router();
 // skills.html ADD A Skill
   router.post("/skills/newSkill", orms.createNewSkill);
 
+//Lessons.html ADD A NEW LESSON RESULT
+    router.post("/lesson/newlesson", orms.createNewLesson);
+
 // | R | READ QUERIES =============================================
 
   //get all the students in the collection
