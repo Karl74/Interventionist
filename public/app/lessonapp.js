@@ -249,13 +249,13 @@ callGroupPills();
       performancePill.attr("class", "input-pill ovalPill");
       appenIn.append(performancePill);
 
-      var thisName = this.name;
+      var thisId = this.id;
       var recordFunction = this.recordPerformance;
 
       $(performancePill).on("click", function(){
         console.log(label);
         field.val(label);
-        recordFunction(thisName, label);
+        recordFunction(thisId, label);
         console.log(lessonRecordedPerformace);
       });
 
@@ -305,7 +305,7 @@ callGroupPills();
         appenIn.append([noteBox, closeNote]);
     };
 
-    this.recordPerformance = function(name, performance){
+    this.recordPerformance = function(studentId, performance){
       //==|f25|== WRITES the records for the lesson for each individual student
       //Call by: Event handler --> performace Pill
       var recorded = true;
@@ -313,7 +313,7 @@ callGroupPills();
       for(i = 0; i < lessonRecordedPerformace.length; i++){
         if(lessonRecordedPerformace[i].name === name){
           console.log("already recorded");
-          lessonRecordedPerformace.splice(i,1,{name: name, performance: performance});
+          lessonRecordedPerformace.splice(i,1,{studentId: studentId, performance: performance});
           recorded = true;
           break;
         } else {
@@ -322,7 +322,7 @@ callGroupPills();
         }
       }
       if(recorded === false){
-        lessonRecordedPerformace.push({name:name, performace: performance});
+        lessonRecordedPerformace.push({studentId:studentId, performance: performance});
       }
     };
   }; // end of constructor
@@ -354,7 +354,7 @@ callGroupPills();
   // Call By: Submit button event handler e4
 
   function postLesson(){
-    $.post("/api/lesson/newlesson", evaluationObject, function(data){
+    $.post("/api/lesson/newlesson", lessonObject, function(data){
       console.log(data);
     });
   }

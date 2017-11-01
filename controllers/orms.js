@@ -2,6 +2,7 @@ var Student = require("../models/Student.js");
 var Group = require("../models/Group.js");
 var Evaluation = require("../models/Evaluation.js");
 var Skills = require("../models/Skills.js");
+var Lesson = require("../models/Lesson.js");
 
 module.exports = {
   //CREATE new Student
@@ -120,8 +121,13 @@ module.exports = {
           res.send(skills);
         }
       });
+    },
+    //CREATE
+    createNewLesson: function(req, res){
+      Lesson.create(req.body).then(function(doc){
+        res.json(doc)}).catch(function(err){
+          res.json(err);
+        });
     }
-
-
 
 }// end of moduleExports
