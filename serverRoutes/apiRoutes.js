@@ -19,7 +19,7 @@ var router = new express.Router();
   router.post("/skills/newSkill", orms.createNewSkill);
 
 //Lessons.html ADD A NEW LESSON RESULT
-    router.post("/lesson/newlesson", orms.createNewLesson);
+  router.post("/lesson/newlesson", orms.createNewLesson);
 
 // | R | READ QUERIES =============================================
 
@@ -34,6 +34,9 @@ var router = new express.Router();
 
   // get myskills
     router.get("/app/myskills", orms.showMySkills);
+
+  // get an evaluation by name:
+    router.get("/app/evaluation/:name", orms.evaluationByName);
 
 // | U | UDATE QUERIES =============================================
 

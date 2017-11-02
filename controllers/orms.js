@@ -128,6 +128,20 @@ module.exports = {
         res.json(doc)}).catch(function(err){
           res.json(err);
         });
+    },
+
+    evaluationByName: function(req, res){
+      var evaluationName = req.params.name;
+      Evaluation.find({evaluationName: evaluationName}).
+      populate({path:"studentId", select:"stuName"}).
+      exec(function(err, evaluation){
+        console.log(evaluation[0]);
+        if(err){
+          res.status().send(err)
+        } else{
+          res.send(evaluation);
+        }
+      });
     }
 
 }// end of moduleExports
