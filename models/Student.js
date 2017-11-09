@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
+var Group = require("./Group.js");
 
 var studentSchema = new Schema({
   // teacherId:{type: Schema.Types.ObjectId, ref: "Teacher"},
@@ -12,7 +13,7 @@ var studentSchema = new Schema({
 
   stuTier:{type: Number},
 
-  stuGroups: [{type:Schema.Types.ObjectId, ref: "Group"}]
+  stuGroups: [{type: Schema.Types.ObjectId, ref: "Group"}]
 });
 
 var Student = mongoose.model("Student", studentSchema);

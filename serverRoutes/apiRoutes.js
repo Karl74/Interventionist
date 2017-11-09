@@ -36,7 +36,7 @@ var router = new express.Router();
     router.get("/app/myskills", orms.showMySkills);
 
   // get an evaluation by name:
-    router.get("/app/evaluation/:name", orms.evaluationByName);
+    router.get("/app/evaluation/:name", orms.populateTest);
 
 // | U | UDATE QUERIES =============================================
 
@@ -92,6 +92,11 @@ var router = new express.Router();
   // 6 - teams.html
     router.get("/groups", function(req, res){
       res.sendFile(path.join(__dirname, "../public/teams.html"))
+    });
+
+    //7 - reports.html
+    router.get("/reportes", function(req, res){
+      res.sendFile(path.join(__dirname, "../public/reports.html"))
     });
 
   // 7 - newuser.html

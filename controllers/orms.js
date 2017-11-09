@@ -1,3 +1,4 @@
+var mongoose = require("mongoose");
 var Student = require("../models/Student.js");
 var Group = require("../models/Group.js");
 var Evaluation = require("../models/Evaluation.js");
@@ -130,18 +131,30 @@ module.exports = {
         });
     },
 
-    evaluationByName: function(req, res){
-      var evaluationName = req.params.name;
-      Evaluation.find({evaluationName: evaluationName}).
-      populate({path:"studentId", select:"stuName"}).
-      exec(function(err, evaluation){
-        console.log(evaluation[0]);
+    FIRSTTRYOFpopulateTest: function(req, res){
+      var name = req.params.name;
+      console.log("this is "+ name);
+      Student.find({stuName:name}).
+      populate("Groups").exec(function(err, Student){
         if(err){
-          res.status().send(err)
-        } else{
-          res.send(evaluation);
+          console.log(err);
+        } else {
+          console.log(Students.StuGroups);
+          return res.json(Student.StuGroups);
         }
       });
+    },
+
+    populateTest: function(req, res){
+      var name = req.params.name;
+      Student.find({stuName: name}, function(err, doc){
+        if(err) {return res.send(err);}
+        Student.populate(doc, {path:"stuGroups", select:"groupName"},function(err, response){
+          if(err){return res.send(err);}
+          console.log(doc);
+          res.send(response);
+        });
+      })
     }
 
 }// end of moduleExports
