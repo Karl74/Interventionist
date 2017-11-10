@@ -131,20 +131,6 @@ module.exports = {
         });
     },
 
-    FIRSTTRYOFpopulateTest: function(req, res){
-      var name = req.params.name;
-      console.log("this is "+ name);
-      Student.find({stuName:name}).
-      populate("Groups").exec(function(err, Student){
-        if(err){
-          console.log(err);
-        } else {
-          console.log(Students.StuGroups);
-          return res.json(Student.StuGroups);
-        }
-      });
-    },
-
     populateTest: function(req, res){
       var name = req.params.name;
       Student.find({stuName: name}, function(err, doc){

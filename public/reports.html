@@ -1,22 +1,137 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <h1>This is the report</h1>
+<head>
+  <meta charset="utf-8">
+  <title>Evaluations</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <!-- css -->
+  <link rel="stylesheet" href="/css/master.css">
+</head>
+<body data-file="evaluations">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <ul class="nav nav-pills">
+      <li class="active"><a href="/">Home</a></li>
+      <li ><a href="/api/lesson">Lesson</a></li>
+      <li ><a href="/api/evaluation">Evaluation</a></li>
+      <li ><a href="/api/reportes">Reports</a></li>
+      <li ><a href="/api/skills">Skills</a></li>
+      <li ><a href="/api/students">Student</a></li>
+      <li ><a href="/api/groups">Groups</a></li>
+    </ul>
+  </nav>
+  <div class="container-fluid">
+    <div class="">
+      <h1 class="window-title">Evaluation Report</h1>
+    </div>
+
+<!-- | A | SELECT A GROUP SECTION ==============================  -->
+  <div class="pill-box">
+    <div class="">
+      <h4 class=>Select a group</h4>
+    </div>
+    <div class="pill-display group-display">
+      <!-- The groups pills are dynamic displayed here -->
+      <div class="find-pill pill">
+        Type Name
+      </div>
+      <div class="group-pill pill">
+        Sample2
+      </div>
+    </div>
+  </div>
+  <!-- End of the groups spillbox -->
+
+  <!-- | B | EVALUATIONS AVAILABLE SECTION ==============================  -->
+  <div class="form-box preset">
+    <div class="">
+      <h4 class="section-title">Group's Evluation</h4>
+    </div>
+
+    <form class="form-inline">
+      <div class="form-group">
+        <label for="evName">Name</label>
+        <input type="text" class="form-control" id="evName" placeholder="New Evaluation">
+      </div>
+      <div class="form-group">
+        <label for="evDate">Date</label>
+        <input type="text" class="form-control" id="evDate" placeholder="Date">
+      </div>
+      <button id="newEvaluationBtn" class="btn btn-default">Start New Evaluation</button>
+    </form>
+  </div> <!-- End of New evaluation form -->
+
+  </div>   <!-- end of container  -->
+
   </body>
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
     crossorigin="anonymous"></script>
-    <script type="text/javascript">
-  console.log("hello world");
+  <script type="text/javascript">
+
+  // !=======================================================================!
+  // !                    FUNCTIONS FOR EVALUATION.HTML                           !
+  // !==++===================================================================!
+
+    var activeTeam = "not assigned";
+
+    var evaluationGrades = [{studentId:"empty", grade:"empty"}];
+
+    var evaluationObject = {
+      evaluationName: "",
+      evaluationDate: "",
+      groupEvaluated: activeTeam,
+      evaluationGrades:[]
+    }
+
+  // ==|f1| == DISPLAY the existing group pills fro, the DB
+  // Call By: Loading and refresh page
+  // Parameters:
+
+    function callGroupPills(){
+      $.get("/api/app/allGroups", function(data){
+        console.log(data);
+        for(i = 0; i <data.length; i++){
+        //CallBack: f2
+          groupPill(data[i].groupName, $(".group-display"), data[i]._id);
+        }
+      });
+    }
+
+  // ==|f2| == CREATE group pills
+  // Call By: callGroupPills()
+  // Parameters:name of the group, parent div and index
+  console.log("hey this is working")
+    function groupPill(groupName, parent, group_id){
+      var pillGroup = $("<div>");
+      pillGroup.attr("class", "group-pill pill");
+      pillGroup.html(groupName);
+      parent.append(pillGroup);
+
+      // == |e1| ==  CHANGE the activeTeam
+                  // MAKE the "Student Pills Sections" visible
+                 // GET AND SORT the students pill
+      // Call to: showASection() f3, getStudentsFromDb() f4,
+      pillGroup.on("click", function(){
+        activeTeam = group_id;
+        evaluationObject.groupEvaluated = group_id;
+        $("#teamName").html(groupName);
+      //CallBack f3
+        showASection($(".preset"));
+      //CallBack f6
+        getStudentsFromDb();
+      });
+    }
+
+  callGroupPills();
 
 
-    $.get("/api/app/evaluation/Mariana", function(data){
-      console.log(data);
-    });
+  </script>
 
-    </script>
+
+
+
 </html>
