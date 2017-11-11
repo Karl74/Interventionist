@@ -69,6 +69,9 @@ function showASection(givenClass){
   function getEvaluations(groupId){
     $.get("/api/app/evaluation/"+groupId, function(data){
       console.log(data);
+      for(i=0; i<data.length; i++){
+        createEvaPill(data[i].evaluationName, data[i]._id, $(".stu-dis"));
+      }
     })
   }
 
@@ -81,4 +84,10 @@ function showASection(givenClass){
       evalPill.attr("id", evalId);
       evalPill.html(evalName);
       parent.append(evalPill);
+
+      // == |e2| ==  CALL the evaluation report
+      // Call to:
+      evalPill.on("click", function(){
+        console.log("soon the report will be called");
+      })
     }
