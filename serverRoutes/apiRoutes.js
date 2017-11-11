@@ -36,7 +36,7 @@ var router = new express.Router();
     router.get("/app/myskills", orms.showMySkills);
 
   // get an evaluation by name:
-    router.get("/app/evaluation/:name", orms.populateTest);
+    router.get("/app/evaluation/:groupId", orms.callEvaluationByGroup);
 
 // | U | UDATE QUERIES =============================================
 

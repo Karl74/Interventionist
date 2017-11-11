@@ -26,7 +26,6 @@ module.exports = {
   },
 
   editAStudent: function(req, res){
-
     Student.findOneAndUpdate({_id: req.body._id},
        {stuName: req.body.stuName,
         stuGradeLevel: req.body.stuGradeLevel,
@@ -141,6 +140,17 @@ module.exports = {
           res.send(response);
         });
       })
+    },
+
+    callEvaluationByGroup: function(req, res){
+      var group = req.params.groupId;
+      Evaluation.find({groupEvaluated: group}, function(err,evaluations){
+        if(err){
+          res.status(500).send(err)
+        }else{
+          res.send(evaluations);
+        }
+      });
     }
 
 }// end of moduleExports
