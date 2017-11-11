@@ -35,8 +35,11 @@ var router = new express.Router();
   // get myskills
     router.get("/app/myskills", orms.showMySkills);
 
-  // get an evaluation by name:
+  // get an evaluation by name "groupId":
     router.get("/app/evaluation/:groupId", orms.callEvaluationByGroup);
+
+  // get an evaluation by name:
+    router.get("/app/evaluationbyid/:id", orms.callEvaluationId2);
 
 // | U | UDATE QUERIES =============================================
 

@@ -81,13 +81,34 @@ function showASection(givenClass){
     function createEvaPill(evalName, evalId, parent){
       var evalPill = $("<div>");
       evalPill.attr("class", "skill-pill pill");
-      evalPill.attr("id", evalId);
+      evalPill.attr("id", evalId); //this might not be necesary
       evalPill.html(evalName);
       parent.append(evalPill);
 
       // == |e2| ==  CALL the evaluation report
       // Call to:
       evalPill.on("click", function(){
-        console.log("soon the report will be called");
+        getEvaluationById(evalId);
+        console.log("are you working?");
       })
     }
+
+//==|f6|== GET Evaluations for required id.
+  //Call by: Evant hanfler --> pillGroup
+  //CallBack: displayEval()f5
+
+  function getEvaluationById(_id){
+    console.log(_id);
+    $.get("/api/app/evaluationbyid/"+_id, function(data){
+      console.log("================================");
+      console.log(data[0].evaluationGrades);
+      // console.log(data[0].evaluationGrades[0].studentId.stuName);
+      // console.log(data[0].evaluationGrades[0].studentId.stuName);
+      for(i=0; i<data[0].evaluationGrades.length; i++){
+        console.log(
+          data[0].evaluationGrades[i].studentId.stuName + " =====> " +
+          data[0].evaluationGrades[i].grade
+        );
+      }
+    });
+  }

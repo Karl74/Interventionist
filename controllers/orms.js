@@ -144,6 +144,7 @@ module.exports = {
 
     callEvaluationByGroup: function(req, res){
       var group = req.params.groupId;
+      console.log("hello this is qworking")
       Evaluation.find({groupEvaluated: group}, function(err,evaluations){
         if(err){
           res.status(500).send(err)
@@ -151,6 +152,19 @@ module.exports = {
           res.send(evaluations);
         }
       });
-    }
+    },
 
+    callEvaluationId2: function(req, res){
+      var evId = req.params.id;
+      console.log("Yes I am working");
+      console.log(evId);
+      Evaluation.find({_id: evId}, function(err, doc){
+        if(err) {return res.send(err);}
+        Evaluation.populate(doc, {path:"evaluationGrades.studentId", select:"stuName"},function(err, response){
+          if(err){return res.send(err);}
+          console.log(doc);
+          res.send(response);
+        });
+      })
+    }
 }// end of moduleExports
