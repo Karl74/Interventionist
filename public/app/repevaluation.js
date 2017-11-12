@@ -49,13 +49,15 @@ console.log("hey this is working")
       showASection($(".preset"));
     //CallBack f6
       getEvaluations(group_id);
+      $(".stu-dis").empty();
+      $("#evalTable").empty();
     });
   }
 
 callGroupPills();
 
 // ==|f3|== MAKE A CARD VISIBLE
-  // Call by: Event handler --> #createNewGroup
+  // Call by: Event handler --> #createNewGroup,
   //Parameters: the div hide element to turn visible
 
 function showASection(givenClass){
@@ -89,7 +91,8 @@ function showASection(givenClass){
       // Call to:
       evalPill.on("click", function(){
         getEvaluationById(evalId);
-        console.log("are you working?");
+        $("#evalTable").empty();
+        showASection($(".recordBox"));
       })
     }
 
@@ -105,10 +108,27 @@ function showASection(givenClass){
       // console.log(data[0].evaluationGrades[0].studentId.stuName);
       // console.log(data[0].evaluationGrades[0].studentId.stuName);
       for(i=0; i<data[0].evaluationGrades.length; i++){
-        console.log(
-          data[0].evaluationGrades[i].studentId.stuName + " =====> " +
+        createDataRow(
+          data[0].evaluationGrades[i].studentId.stuName,
           data[0].evaluationGrades[i].grade
         );
       }
     });
   }
+
+//==|f7|== DISPLAY student evaluation result
+    // Cal by: getEvaluationById() f6
+
+    function createDataRow(stuName, evGrade){
+      var dataRow = $("<div>");
+      dataRow.attr("class", "dataRow");
+      $("#evalTable").append(dataRow);
+
+      var name = $("<h5>");
+      name.html(stuName);
+      dataRow.append(name);
+
+      var grade = $("<div>");
+      grade.html(evGrade);
+      dataRow.append(grade);
+    }

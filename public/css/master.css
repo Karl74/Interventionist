@@ -346,6 +346,13 @@ outline: 0;
   display: flex;
   justify-content: space-evenly;
 }
+
+.dataRow{
+  font-weight: 600;
+  display: flex;
+  justify-content: space-evenly;
+}
+
  .showInput{
    width: 60px;
  }
