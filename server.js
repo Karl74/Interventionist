@@ -7,7 +7,7 @@ var routes = require("./serverRoutes/routes");
 
 var app = express();
 
-var PORT = process.env.PORT || 2727;
+var PORT = process.env.MONGODB_URI || 2727;
 // mongoose.Promise = bluebird;
 mongoose.Promise = global.Promise;
 var app = express();
@@ -17,8 +17,8 @@ app.use(express.static(__dirname + "/public"));
 
 app.use("/", routes);
 
-//var db = process.env.MONGODB_URI || "mongodb://localhost/interventionDb";
-var db = "mongodb://localhost/interventionDb"
+var db = process.env.MONGODB_URI || "mongodb://localhost/interventionDb";
+// var db = "mongodb://localhost/interventionDb"
 mongoose.connect(db, function(error) {
   //Log any errors connecting with mongoose
   if (error) {
